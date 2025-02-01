@@ -1,10 +1,21 @@
 
 import ClickMenu from './client-components/main-page/ClickMenu';
+import Card from './components/blog/blogCard';
+import BlogMenu from './components/blog/blogMenu';
+import Header from './components/header/header';
 export default function MainPage() {
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-inter)] font-bold">
-      <h1 className='text-4xl'>Здарова Ишак!</h1>
+    <div className="flex flex-col gap-10 items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-50">
+      <Header/>
+      <h1 className='text-4xl self-start ml-32'>Здарова Ишак! Смари!</h1>
+      <BlogMenu>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+      </BlogMenu>
+
       <ClickMenu />
 
     </div>

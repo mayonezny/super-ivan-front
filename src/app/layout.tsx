@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Inter } from 'next/font/google';
+import { Geist, Inter, UnifrakturMaguntia } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({
@@ -12,9 +12,10 @@ const geistSans = Geist({
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const UniF = UnifrakturMaguntia({
+  variable: '--font-unif',
   subsets: ['latin'],
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${inter.variable} antialiased`}
+        className={`${inter.variable} ${geistSans.variable} ${UniF.variable} antialiased`}
       >
         {children}
       </body>
