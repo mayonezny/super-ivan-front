@@ -1,0 +1,22 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "security.workspace.trust.untrustedFiles": "open",
+    "cmake.configureOnOpen": true,
+    "git.autofetch": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "javafx.libPath": "c:/Program Files/Java/javafx-sdk-22.0.2/lib",
+    "C_Cpp.default.compilerPath": "cl.exe",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "always"
+    },
+    "editor.formatOnSave": true,
+    "eslint.alwaysShowStatus": true,
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "javascriptreact"
+    ],
+    
+    "eslint.codeActionsOnSave.rules": null
+}
