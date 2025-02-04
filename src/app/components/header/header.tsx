@@ -4,7 +4,7 @@ import Image from 'next/image';
 const Header = () => {
 
   return (
-    <nav className="sticky top-0 shadow-md bg-white flex justify-between items-center px-5 p-2 w-full text-xl">
+    <nav className="sticky top-0 z-50 shadow-md bg-white flex justify-between items-center px-5 p-2 w-full text-xl">
       <div className="flex gap-8 items-center">
         <NavButton href='/' className='px-0 py-0'>
           <Image
