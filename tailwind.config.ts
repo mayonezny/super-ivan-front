@@ -10,6 +10,7 @@ export default {
     extend: {
       width: {
         'card': '500px',
+        '9/10': '90%',
       },
       height: {
         'card': '350px',
