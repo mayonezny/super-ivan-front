@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Geist, Inter, UnifrakturMaguntia } from 'next/font/google';
+// eslint-disable-next-line camelcase
+import { Geist, Inter, Roboto_Condensed, UnifrakturMaguntia } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({
@@ -18,6 +19,12 @@ const UniF = UnifrakturMaguntia({
   weight: '400',
 });
 
+const RobotoC = Roboto_Condensed({
+  variable: '--font-roboto-c',
+  subsets: ['latin'],
+  weight: '400',
+});
+
 export const metadata: Metadata = {
   title: 'Без названия - Неизвестен',
   description: 'Здесь закалялась сталь',
@@ -31,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${geistSans.variable} ${UniF.variable} antialiased`}
+        className={`${inter.variable} ${geistSans.variable} ${UniF.variable} ${RobotoC.variable} antialiased`}
       >
         {children}
       </body>
