@@ -9,11 +9,13 @@ export default {
   theme: {
     extend: {
       width: {
-        'card': '500px',
+        'card-2xl': '500px',
+        'card-xl': '400px',
         '9/10': '90%',
       },
       height: {
-        'card': '350px',
+        'card-2xl': '350px',
+        'card-xl': '280px',
       },
       colors: {
         background: 'var(--background)',

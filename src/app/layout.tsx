@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 // eslint-disable-next-line camelcase
 import { Geist, Inter, Roboto_Condensed, UnifrakturMaguntia } from 'next/font/google';
 import './globals.css';
@@ -28,6 +28,11 @@ const RobotoC = Roboto_Condensed({
 export const metadata: Metadata = {
   title: 'Без названия - Неизвестен',
   description: 'Здесь закалялась сталь',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({

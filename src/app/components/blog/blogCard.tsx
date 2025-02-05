@@ -1,13 +1,14 @@
 import Link from 'next/link';
 
-const Card = ({ href, pic, title }) => {
+const Card = ({ href, pic, title, author, date }) => {
 
   return (
 
-    <div className="relative shadow-[0px_0px_10px_rgba(0,0,0,0.2)] bg-white rounded-lg w-card h-card flex justify-between bg-cover bg-center transition-transform duration-300 hover:scale-105" style={{ backgroundImage: `url(${pic})` }}>
+    <div className="relative shadow-[0px_0px_10px_rgba(0,0,0,0.2)] bg-white rounded-lg flex justify-between bg-cover bg-center transition-transform duration-300 hover:scale-105 2xl:w-card-2xl 2xl:h-card-2xl xl:w-card-xl xl:h-card-xl" style={{ backgroundImage: `url(${pic})` }}>
       <Link href={href}>
-        <div className="absolute rounded-lg p-5 inset-0 bg-gradient-to-b from-white/100 via-white/30 to-black/100">
+        <div className="absolute rounded-lg flex flex-col justify-between p-5 inset-0 bg-gradient-to-b from-white/100 via-white/30 to-black/100">
           <h1 className="font-bold text-[22px] font-[family-name:var(--font-roboto-c)]">{title}</h1>
+          <h1 className="font-bold text-[22px] font-[family-name:var(--font-roboto-c)] text-white">{author && `Автор: ${author}`}</h1>
         </div>
       </Link>
     </div>
