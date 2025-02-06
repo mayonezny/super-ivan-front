@@ -1,0 +1,9 @@
+.svg-icon {
+    transition: fill 0.3s ease;
+    fill: #666; /* Плавное изменение цвета */
+  }
+  
+  .svg-icon:hover * {
+    fill: #444;
+    cursor: pointer; /* Темнее начального цвета */
+  }

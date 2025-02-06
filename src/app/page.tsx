@@ -4,7 +4,7 @@ import ClickMenu from './client-components/main-page/ClickMenu';
 import Card from './components/blog/blogCard';
 import BlogMenu from './components/blog/blogMenu';
 import Header from './components/header/header';
-import MainPageLayout from './layouts/mainPageLayout';
+import MainLayout from './layouts/mainLayout';
 
 export interface Post {
   id: number;
@@ -31,16 +31,16 @@ export async function getPosts(): Promise<Post[]> {
 export default async function MainPage() {
   const posts: Post[] = await getPosts();
   return (
-    <div className="flex flex-col gap-10 items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-50">
+    <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-50">
       <Header/>
-      <MainPageLayout>
+      <MainLayout>
         <h1 className='text-4xl self-start mb-4'>Здарова Ишак! Смари!</h1>
         <BlogMenu>
           {posts.map((post) => (
             <Card key={post.id} href={post.href} pic={post.pic} title={post.title} author={post.author} date={post.date}/>
           ))}
         </BlogMenu>
-      </MainPageLayout>
+      </MainLayout>
 
       <ClickMenu />
 
