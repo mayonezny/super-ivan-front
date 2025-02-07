@@ -5,6 +5,7 @@ import Card from './components/blog/blogCard';
 import BlogMenu from './components/blog/blogMenu';
 import Header from './components/header/header';
 import MainLayout from './layouts/mainLayout';
+import SearchMenu from './components/misc/searchMenu';
 
 export interface Post {
   id: number;
@@ -15,31 +16,17 @@ export interface Post {
   date: Date;
 }
 
-export async function getPosts(): Promise<Post[]> {
-  const response = await axios.get('http://localhost:3000/api/getposts', {
-    headers: {
-      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-      Pragma: 'no-cache',
-      Expires: '0',
-    },
-  });
-  const posts: Post[] = await response.data;
-
-  return posts;
-}
-
-export default async function MainPage() {
-  const posts: Post[] = await getPosts();
+export default function MainPage() {
   return (
     <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-50">
       <Header/>
       <MainLayout>
-        <h1 className='text-4xl self-start mb-4'>Здарова Ишак! Смари!</h1>
-        <BlogMenu>
-          {posts.map((post) => (
-            <Card key={post.id} href={post.href} pic={post.pic} title={post.title} author={post.author} date={post.date}/>
-          ))}
-        </BlogMenu>
+        <div className='flex justify-between'>
+          <h1 className='text-4xl self-start mb-4'>Здарова Ишак! Смари!</h1>
+          <SearchMenu type='main'/>
+        </div>
+
+        <BlogMenu/>
       </MainLayout>
 
       <ClickMenu />

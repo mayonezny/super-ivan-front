@@ -18,7 +18,7 @@ const BlogPage = () => {
               <Plus/>
               <Filter/>
             </div>
-            <SearchMenu/>
+            <SearchMenu type='blog'/>
           </div>
 
         </div>
