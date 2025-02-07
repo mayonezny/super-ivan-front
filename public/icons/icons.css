@@ -1,3 +1,7 @@
+#search:hover * {
+  fill: #666;
+  cursor: default;
+}
 .svg-icon {
     transition: fill 0.3s ease;
     fill: #666; /* Плавное изменение цвета */

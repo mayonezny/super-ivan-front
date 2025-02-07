@@ -10,10 +10,11 @@ class PostsStore {
     makeAutoObservable(this);
   }
 
-  async fetchPosts() {
+  async fetchPosts(keyword?: string) {
     this.loading = true;
     try {
-      const response = await axios.get('http://localhost:3000/api/getposts');
+
+      const response = await axios.get(`http://localhost:3000/api/getposts${keyword ? `?keyword=${keyword}` : ''}`);
       this.posts = response.data;
       this.loading = false;
     } catch (err) {
