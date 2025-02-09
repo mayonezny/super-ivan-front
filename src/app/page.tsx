@@ -1,8 +1,8 @@
 
 import axios from 'axios';
 import ClickMenu from './client-components/main-page/ClickMenu';
-import Card from './components/blog/blogCard';
-import BlogMenu from './components/blog/blogMenu';
+import Card from './components/blog/postCard';
+import BlogMenu from './components/blog/postsContainer';
 import Header from './components/header/header';
 import MainLayout from './layouts/mainLayout';
 import SearchMenu from './components/misc/searchMenu';
@@ -26,7 +26,7 @@ export default function MainPage() {
           <SearchMenu type='main'/>
         </div>
 
-        <BlogMenu/>
+        <BlogMenu type='all'/>
       </MainLayout>
 
       <ClickMenu />

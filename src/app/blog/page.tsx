@@ -1,6 +1,6 @@
-import Filter from '../../../public/icons/filter';
-import Pencil from '../../../public/icons/pencil';
-import Plus from '../../../public/icons/plus';
+
+import ModalContainer from '../components/blog/modalContainer';
+import BlogMenu from '../components/blog/postsContainer';
 import Header from '../components/header/header';
 import SearchMenu from '../components/misc/searchMenu';
 import MainLayout from '../layouts/mainLayout';
@@ -14,15 +14,12 @@ const BlogPage = () => {
         <div className='flex justify-between'>
           <h1 className='text-4xl'>Мои посты</h1>
           <div className='flex gap-5'>
-            <div className='flex justify-between items-center w-24 p-2 pr-3 shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-3xl bg-white'>
-              <Plus/>
-              <Filter/>
-            </div>
+            <ModalContainer/>
             <SearchMenu type='blog'/>
           </div>
 
         </div>
-        <div className='w-full h-screen shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-xl bg-white'></div>
+        <BlogMenu type='user' className='w-full p-7 gap-5 shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-xl bg-white'/>
       </MainLayout>
     </div>
   );
