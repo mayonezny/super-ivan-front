@@ -16,7 +16,7 @@ const BlogMenu = observer(({ type, ...props }) => {
   return (
     <div className={clsx('grid grid-cols-3 gap-10 px-5 p-2 text-xl justify-items-center', className)}>
       {postsStore.posts.map((post) => (
-        <Card key={post.id} href={post.href} pic={post.pic} title={post.title} author={post.author} date={post.date} edit={type === 'user' ? true : false} as={Link}/>
+        <Card key={post.id} id={post.id} href={post.href} pic={post.pic} title={post.title} author={post.author} date={post.date} edit={type === 'user' ? true : false} as={Link}/>
       ))}
     </div>
   );

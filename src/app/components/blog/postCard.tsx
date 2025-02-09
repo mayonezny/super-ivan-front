@@ -3,7 +3,8 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { useState } from 'react';
 import Pencil from '../../../../public/icons/pencil';
-const Card = ({ href, pic, title, author, date, ...props }) => {
+import postsStore from 'imp/store/PostsStore';
+const Card = ({ id, href, pic, title, author, date, ...props }) => {
   const {
     as,
     edit,
@@ -11,6 +12,9 @@ const Card = ({ href, pic, title, author, date, ...props }) => {
   const Component = edit ? 'div' : as;
   const [menuOpen, setMenuOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const handlePostDelete = async () => {
+    await postsStore.deletePost(id);
+  };
   return (
 
     <div className="relative shadow-[0px_0px_10px_rgba(0,0,0,0.2)] bg-white rounded-lg flex justify-between bg-cover bg-center transition-transform duration-300 hover:scale-105 2xl:w-card-2xl 2xl:h-card-2xl xl:w-card-xl xl:h-card-xl" style={{ backgroundImage: `url(${pic})` }}>
@@ -31,7 +35,7 @@ const Card = ({ href, pic, title, author, date, ...props }) => {
           <button className="w-full text-left p-2 hover:bg-gray-100" onClick={() => {setEditMode(!editMode); setMenuOpen(false);}}>
             {editMode ? 'Закончить редактирование' : 'Редактировать'}
           </button>
-          <button className="w-full text-left p-2 hover:bg-gray-100" onClick={() => alert('Удалить')}>
+          <button className="w-full text-left p-2 hover:bg-gray-100" onClick={handlePostDelete}>
             Удалить
           </button>
           <button className="w-full text-left p-2 hover:bg-gray-100" onClick={() => setMenuOpen(false)}>

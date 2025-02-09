@@ -46,7 +46,7 @@ class PostsStore {
 
   async deletePost(postId: number) {
     try {
-      await axios.delete(`/api/posts/${postId}`);
+      await axios.delete(`http://localhost:3000/api/deletepost/${postId}`);
       this.posts = this.posts.filter(post => post.id !== postId); // Удаляем пост
     } catch (err) {
       console.error('Ошибка при удалении поста');
