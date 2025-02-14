@@ -70,9 +70,9 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           }`, (errors.title || errors.content || errors.pic) ? 'gap-2' : 'gap-5')}
         >
           <h2 className="text-3xl font-medium text-center">Новый пост:</h2>
-          <input {...register('title')} className={clsx('bg-[#f0f0f0] rounded-lg flex-[0.1] w-full p-2 xl:p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0]')} placeholder='Заголовок...'></input>
+          <input {...register('title')} className={clsx('bg-[#f0f0f0] rounded-lg flex-[0.1] w-full p-2 xl:p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0]',(!errors.title && (errors.content || errors.pic)) ? 'mb-2' : '')} placeholder='Заголовок...'></input>
           {errors.title && <span className='flex text-red-500 text-sm flex-[0.1] items-center'>{errors.title.message}</span>}
-          <textarea {...register('content')} className={clsx('bg-[#f0f0f0] rounded-lg flex-1 w-full h-full p-2 xl:p-3 font-[family-name:var(--font-roboto-c)] resize-none text-clip focus:outline-none placeholder:px-[2px] placeholder:text-[#a0a0a0]')} placeholder='Контент...'></textarea>
+          <textarea {...register('content')} className={clsx('bg-[#f0f0f0] rounded-lg flex-1 w-full h-full p-2 xl:p-3 font-[family-name:var(--font-roboto-c)] resize-none text-clip focus:outline-none placeholder:px-[2px] placeholder:text-[#a0a0a0]', (!errors.content && (errors.title || errors.pic)) ? 'mb-2' : '')} placeholder='Контент...'></textarea>
           {errors.content && <span className='flex text-red-500 text-sm flex-[0.1] items-center'>{errors.content.message}</span>}
           <Controller
             name='pic'
