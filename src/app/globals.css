@@ -30,3 +30,12 @@ body {
   }
 }
 
+.filepond-label{
+  font-family: var(--font-roboto-c);
+  text-decoration: underline;
+  color: #8a8a8a;
+}
+
+.filepond-label:hover{
+  cursor: pointer;
+}
