@@ -12,8 +12,9 @@ registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 const ImageUploader = ({ controllerField, className }) => {
 
   const handleFileSet = (files) => {
-    controllerField.onChange(files.length > 0 ? files[0] : null);
-    console.log('ivanva', files);
+    const file = files.length > 0 ? files[0] : null;
+    controllerField.onChange(file);
+    console.log('ivanva', file);
   };
 
   return (

@@ -29,9 +29,13 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   const [visible, setVisible] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
 
-  const handlePostUpload = (data) => {
-    // postsStore.addPost();
-    console.log(data);
+  const handlePostUpload = async (data) => {
+    const formData = new FormData();
+    formData.append('pic', data.pic.file, data.pic.file.name);
+    const pic = await postsStore.postPicImgSave(formData);
+    if(!pic){
+
+    }
   };
 
   useEffect(() => {

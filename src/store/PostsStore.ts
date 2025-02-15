@@ -23,9 +23,23 @@ class PostsStore {
     }
   }
 
-  async addPost(post: Post) {
+  async postPicImgSave(formData: FormData) {
     try {
-      const response = await axios.post('/api/posts', post);
+      const response = await axios.post('http://localhost:3000/api/postPicImgSave', formData, {
+        headers:{
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data.url;
+    } catch (err) {
+      console.error('Ошибка при добавлении поста');
+      return undefined;
+    }
+  }
+
+  async addPost(post: any) {
+    try {
+      const response = await axios.post('http://localhost:3000/api/postPicImgSave', post);
       this.posts.push(response.data); // Добавляем новый пост
     } catch (err) {
       console.error('Ошибка при добавлении поста');
