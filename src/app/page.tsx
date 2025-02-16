@@ -8,12 +8,13 @@ import MainLayout from './layouts/mainLayout';
 import SearchMenu from './components/misc/searchMenu';
 
 export interface Post {
-  id: number;
-  href: string;
+  id?: number;
+  href?: string;
   pic: string;
   title: string;
   author: string;
-  date: Date;
+  date?: Date;
+  content: string;
 }
 
 export default function MainPage() {

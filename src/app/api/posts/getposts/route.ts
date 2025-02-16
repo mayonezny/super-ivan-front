@@ -1,6 +1,7 @@
 
 // app/api/getposts/route.ts
 import axios from 'axios';
+import { outerApi } from 'imp/utils/constants/endpoints';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
@@ -9,7 +10,7 @@ export async function GET(req: NextRequest) {
     const keyword = url.searchParams.get('keyword') || undefined;
     // Отправляем запрос на сервер Nest.js (местный сервер)
 
-    const response = await axios.get(`http://localhost:80/api/getposts${keyword ? `?keyword=${keyword}` : ''}`); // Это твой сервер Nest.js
+    const response = await axios.get(`${outerApi}/posts/getposts${keyword ? `?keyword=${keyword}` : ''}`); // Это твой сервер Nest.js
 
     // Возвращаем данные, полученные от сервера Nest.js
     return NextResponse.json(response.data);

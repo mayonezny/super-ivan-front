@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import axios from 'axios';
 import { Post } from '../app/page';
+import { innerApi } from 'imp/utils/constants/endpoints';
 class PostsStore {
   posts: Post[] = [];
   loading: boolean = false;
@@ -14,7 +15,7 @@ class PostsStore {
     this.loading = true;
     try {
 
-      const response = await axios.get(`http://localhost:3000/api/getposts${keyword ? `?keyword=${keyword}` : ''}`);
+      const response = await axios.get(`${innerApi}/posts/getposts${keyword ? `?keyword=${keyword}` : ''}`);
       this.posts = response.data;
       this.loading = false;
     } catch (err) {
@@ -25,7 +26,7 @@ class PostsStore {
 
   async postPicImgSave(formData: FormData) {
     try {
-      const response = await axios.post('http://localhost:3000/api/postPicImgSave', formData, {
+      const response = await axios.post(`${innerApi}/posts/postPicImgSave`, formData, {
         headers:{
           'Content-Type': 'multipart/form-data',
         },
@@ -37,12 +38,15 @@ class PostsStore {
     }
   }
 
-  async addPost(post: any) {
+  async addPost(post: Post) {
     try {
-      const response = await axios.post('http://localhost:3000/api/postPicImgSave', post);
-      this.posts.push(response.data); // Добавляем новый пост
+      const response = await axios.post(`${innerApi}/posts/addPost`, post);
+      console.log('ЭТА ВЕРТАЛЕТ', response.data);
+      this.posts.push(response.data);
+      return response.data.id; // Добавляем новый пост
     } catch (err) {
-      console.error('Ошибка при добавлении поста');
+      console.error('Ошибка при добавлении поста', err);
+      return null;
     }
   }
 
@@ -60,7 +64,7 @@ class PostsStore {
 
   async deletePost(postId: number) {
     try {
-      await axios.delete(`http://localhost:3000/api/deletepost/${postId}`);
+      await axios.delete(`${innerApi}/posts/deletepost/${postId}`);
       this.posts = this.posts.filter(post => post.id !== postId); // Удаляем пост
     } catch (err) {
       console.error('Ошибка при удалении поста');

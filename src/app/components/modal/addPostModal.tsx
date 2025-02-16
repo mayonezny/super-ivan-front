@@ -33,8 +33,13 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     const formData = new FormData();
     formData.append('pic', data.pic.file, data.pic.file.name);
     const pic = await postsStore.postPicImgSave(formData);
-    if(!pic){
 
+    if(pic){
+      const neuesPost = await postsStore.addPost({ pic: pic, title: data.title, author: 'ivan', content: data.content }); //мок на автора, тот будет получаться из куки
+      if(neuesPost){
+        onClose();
+        reset();
+      }
     }
   };
 

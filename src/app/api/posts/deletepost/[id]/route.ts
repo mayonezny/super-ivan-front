@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { outerApi } from 'imp/utils/constants/endpoints';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
@@ -7,7 +8,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     return NextResponse.json({ error: 'ID не указан' }, { status: 400 });
   }
   try {
-    const response = await axios.delete(`http://localhost:80/api/deletepost/${id}`); // Это твой сервер Nest.js
+    const response = await axios.delete(`${outerApi}/posts/deletepost/${id}`); // Это твой сервер Nest.js
     if (!response.ok) {
       return NextResponse.json({ error: 'Ошибка при удалении поста' }, { status: response.status });
     }

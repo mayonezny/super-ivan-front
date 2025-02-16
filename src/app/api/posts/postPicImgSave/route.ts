@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { outerApi } from 'imp/utils/constants/endpoints';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -10,7 +11,7 @@ export async function POST(req: NextRequest) {
   // }
   try {
     //console.log(formData);
-    const response = await axios.post('http://localhost:80/api/postPicImgSave', formData, {
+    const response = await axios.post(`${outerApi}/posts/postPicImgSave`, formData, {
       headers:{
         'Content-Type': 'multipart/form-data',
       },

@@ -1,11 +1,9 @@
 'use client';
-import { useState } from 'react';
 import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
-import { FilePondFile } from 'filepond';
 
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
@@ -14,7 +12,6 @@ const ImageUploader = ({ controllerField, className }) => {
   const handleFileSet = (files) => {
     const file = files.length > 0 ? files[0] : null;
     controllerField.onChange(file);
-    console.log('ivanva', file);
   };
 
   return (
