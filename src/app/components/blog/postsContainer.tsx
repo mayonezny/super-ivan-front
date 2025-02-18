@@ -18,7 +18,7 @@ const BlogMenu = observer(({ type, ...props }) => {
       {postsStore.posts.length === 0 ?
         <div className='col-span-3 text-center'>Плаки-плаки! Здесь ничего нет!</div> :
         postsStore.posts.map((post) => (
-          <Card key={post.id} id={post.id} href={post.href} pic={post.pic} title={post.title} author={post.author} date={post.date} picFilename={post.picFilename} edit={type === 'user' ? true : false} as={Link}/>
+          <Card key={post.id} id={post.id} href={`posts/${post.href}`} pic={post.pic} title={post.title} author={post.author} date={post.date} picFilename={post.picFilename} edit={type === 'user' ? true : false} as={Link}/>
         ))}
     </div>
   );

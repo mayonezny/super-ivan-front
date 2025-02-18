@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import axios from 'axios';
 import { Post } from '../app/page';
 import { innerApi } from 'imp/utils/constants/endpoints';
@@ -8,19 +8,25 @@ class PostsStore {
   error: string | null = null;
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, { autoBind: true });
   }
 
   async fetchPosts(keyword?: string) {
+    if (this.loading) return;
     this.loading = true;
     try {
 
       const response = await axios.get(`${innerApi}/posts/getposts${keyword ? `?keyword=${keyword}` : ''}`);
-      this.posts = response.data;
-      this.loading = false;
+      runInAction(() => {
+        this.posts = response.data;
+        this.loading = false;
+      });
     } catch (err) {
-      this.error = 'Ошибка загрузки постов';
-      this.loading = false;
+      runInAction(() => {
+        this.error = 'Ошибка загрузки постов';
+        this.loading = false;
+      });
+
     }
   }
 
@@ -50,9 +56,9 @@ class PostsStore {
   async addPost(post: Post) {
     try {
       const response = await axios.post(`${innerApi}/posts/addPost`, post);
-
-      this.posts.push(response.data);
-      console.log(response.data);
+      runInAction(() => {
+        this.posts.push(response.data);
+      });
       return response.data.id; // Добавляем новый пост
     } catch (err) {
       console.error('Ошибка при добавлении поста', err);
@@ -75,10 +81,17 @@ class PostsStore {
   async deletePost(postId: number) {
     try {
       await axios.delete(`${innerApi}/posts/deletepost/${postId}`);
-      this.posts = this.posts.filter(post => post.id !== postId); // Удаляем пост
+      runInAction(() => {
+        this.posts = this.posts.filter(post => post.id !== postId); // Удаляем пост
+      });
     } catch (err) {
       console.error('Ошибка при удалении поста');
     }
+  }
+
+  findPostById(id: number){
+    const post = this.posts.find(post => post.id === id);
+    return post ? post : console.warn('Пост не найден');
   }
 }
 

@@ -4,6 +4,7 @@ import { ru } from 'date-fns/locale';
 import { useState } from 'react';
 import Pencil from '../../../../public/icons/pencil';
 import postsStore from 'imp/store/PostsStore';
+import Link from 'next/link';
 const Card = ({ id, href, pic, title, author, date, picFilename, ...props }) => {
   const {
     as,
@@ -35,7 +36,7 @@ const Card = ({ id, href, pic, title, author, date, picFilename, ...props }) => 
         <div className="absolute bottom-0 rounded-lg *:rounded-lg left-0 w-full bg-white shadow-lg p-4 *:px-4 transition-transform duration-300 transform translate-y-0 text-lg">
 
           <button className="w-full text-left p-2 hover:bg-gray-100" onClick={() => {}}>{/*мок, не мок будет када придумаем интерфейс норм просмотра постов*/}
-            Открыть содержимое
+            <Link href={href}>Открыть содержимое</Link>
           </button>
           {/* eslint-disable-next-line brace-style */}
           <button className="w-full text-left p-2 hover:bg-gray-100" onClick={() => {setEditMode(!editMode); setMenuOpen(false);}}>
