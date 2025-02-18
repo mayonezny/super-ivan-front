@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const post = await req.json();
-  console.log(post);
+
   try {
     const response = await axios.post(`${outerApi}/posts/addpost`, post); // Это твой сервер Nest.js
     // if (!response.ok) {

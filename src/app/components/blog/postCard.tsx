@@ -4,7 +4,7 @@ import { ru } from 'date-fns/locale';
 import { useState } from 'react';
 import Pencil from '../../../../public/icons/pencil';
 import postsStore from 'imp/store/PostsStore';
-const Card = ({ id, href, pic, title, author, date, ...props }) => {
+const Card = ({ id, href, pic, title, author, date, picFilename, ...props }) => {
   const {
     as,
     edit,
@@ -13,7 +13,9 @@ const Card = ({ id, href, pic, title, author, date, ...props }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const handlePostDelete = async () => {
+    console.log(picFilename);
     await postsStore.deletePost(id);
+    await postsStore.postPicImgDelete(picFilename);
   };
   return (
 

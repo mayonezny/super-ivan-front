@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     }
     console.log(response.data.url);
     // Возвращаем данные, полученные от сервера Nest.js
-    return NextResponse.json({ url: response.data.url }, { status: 201 });
+    return NextResponse.json({ url: response.data.url, filename: response.data.filename }, { status: 201 });
   } catch (error) {
     console.error('Error fetching data from Nest.js server:', error);
 

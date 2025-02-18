@@ -15,6 +15,7 @@ export interface Post {
   author: string;
   date?: Date;
   content: string;
+  picFilename?: string;
 }
 
 export default function MainPage() {

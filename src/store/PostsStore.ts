@@ -31,18 +31,28 @@ class PostsStore {
           'Content-Type': 'multipart/form-data',
         },
       });
-      return response.data.url;
+      return { url: response.data.url, filename: response.data.filename};
     } catch (err) {
       console.error('Ошибка при добавлении поста');
       return undefined;
     }
   }
 
+  async postPicImgDelete(filename:string){
+    try {
+      const response = await axios.delete(`${innerApi}/posts/postPicImgDelete/${filename}`);
+      return { message: 'Фотография удалена!'};
+    } catch (err) {
+      return console.error('Ошибка при удалении фотографии из хранилища MinIO', err);
+    }
+  }
+
   async addPost(post: Post) {
     try {
       const response = await axios.post(`${innerApi}/posts/addPost`, post);
-      console.log('ЭТА ВЕРТАЛЕТ', response.data);
+
       this.posts.push(response.data);
+      console.log(response.data);
       return response.data.id; // Добавляем новый пост
     } catch (err) {
       console.error('Ошибка при добавлении поста', err);

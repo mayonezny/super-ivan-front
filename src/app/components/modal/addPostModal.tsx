@@ -11,7 +11,7 @@ import postsStore from 'imp/store/PostsStore';
 import clsx from 'clsx';
 
 const addPostSchema = yup.object({
-  title: yup.string().min(6, 'Заголовок должен содержать не менее 6 символов!').max(30, 'Заголовок должен содержать не более 30 символов!').required('Пожалуйста, укажите заголовок'),
+  title: yup.string().min(6, 'Заголовок должен содержать не менее 6 символов!').max(40, 'Заголовок должен содержать не более 40 символов!').required('Пожалуйста, укажите заголовок'),
   content: yup.string().min(20, 'Содержимое поста должно быть не менее 20 символов!').max(1000, 'Обалдеть какое здоровое содержимое!').required('Пожалуйста, укажите содержание поста'),
   pic: yup.mixed().required('Эй! Картинка тоже обязательна!'),
 }).required();
@@ -35,7 +35,7 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     const pic = await postsStore.postPicImgSave(formData);
 
     if(pic){
-      const neuesPost = await postsStore.addPost({ pic: pic, title: data.title, author: 'ivan', content: data.content }); //мок на автора, тот будет получаться из куки
+      const neuesPost = await postsStore.addPost({ pic: pic.url, title: data.title, author: 'ivan', content: data.content, picFilename: pic.filename }); //мок на автора, тот будет получаться из куки
       if(neuesPost){
         onClose();
         reset();
