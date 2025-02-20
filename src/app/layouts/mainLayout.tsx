@@ -1,8 +1,11 @@
 import clsx from 'clsx';
-const MainLayout = ({ children, ...props }) => {
-  const {
-    className,
-  } = props;
+import { ReactNode } from 'react';
+type LayoutProps = {
+  children: ReactNode;
+  className?: string;
+}
+const MainLayout = ({ children, className }: LayoutProps ) => {
+
   return (
 
     <div className={clsx('w-9/10', className)}>

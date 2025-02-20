@@ -1,17 +1,15 @@
+/* eslint-disable no-magic-numbers */
 import axios from 'axios';
 import { outerApi } from 'imp/utils/constants/endpoints';
 import { NextRequest, NextResponse } from 'next/server';
-
+interface urlUploadInterface {
+  url: string;
+  filename: string;
+}
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
-  // if ([...formData.entries()].length === 0) {
-  //   console.log('FormData пустой');
-  // } else {
-  //   console.log('FormData содержит данные');
-  // }
   try {
-    //console.log(formData);
-    const response = await axios.post(`${outerApi}/posts/postPicImgSave`, formData, {
+    const response = await axios.post<urlUploadInterface>(`${outerApi}/posts/postPicImgSave`, formData, {
       headers:{
         'Content-Type': 'multipart/form-data',
       },
@@ -19,7 +17,6 @@ export async function POST(req: NextRequest) {
     if (response.status !== 201) {
       return NextResponse.json({ error: 'Ошибка при отправке данных на сервер' }, { status: response.status });
     }
-    console.log(response.data.url);
     // Возвращаем данные, полученные от сервера Nest.js
     return NextResponse.json({ url: response.data.url, filename: response.data.filename }, { status: 201 });
   } catch (error) {

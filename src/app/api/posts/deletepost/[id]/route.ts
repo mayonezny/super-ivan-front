@@ -9,12 +9,9 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
   }
   try {
     const response = await axios.delete(`${outerApi}/posts/deletepost/${id}`); // Это твой сервер Nest.js
-    if (!response.ok) {
-      return NextResponse.json({ error: 'Ошибка при удалении поста' }, { status: response.status });
-    }
 
     // Возвращаем данные, полученные от сервера Nest.js
-    return NextResponse.json({ message: 'Пост удалён' }, { status: 200 });
+    return NextResponse.json({ message: 'Пост удалён' }, { status: response.status });
   } catch (error) {
     console.error('Error fetching data from Nest.js server:', error);
 

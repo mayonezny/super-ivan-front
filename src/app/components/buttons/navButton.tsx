@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Button from './button';
 import Link from 'next/link';
-
+import React from 'react';
 interface NavButtonProps{
   href: string;
   children: React.ReactNode;

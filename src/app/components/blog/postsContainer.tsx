@@ -5,14 +5,29 @@ import postsStore from 'imp/store/PostsStore';
 import { useEffect } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
-
-const BlogMenu = observer(({ type, ...props }) => {
+type BlogMenuProps = {
+  type: string;
+  className?: string;
+}
+const BlogMenu = observer(({ type, className } : BlogMenuProps) => {
   useEffect(() => {
-    type === 'all' ? postsStore.fetchPosts() : type === 'user' ? postsStore.fetchPosts() : console.error('че'); //сюда добавим получение юзернейма из куки например
-  }, []);
-  const {
-    className,
-  } = props;
+    const fetchData = async () => {
+      if (type === 'all') {
+        try{
+          await postsStore.fetchPosts();
+        } catch(err){
+          console.error('Ошибка при получении постов!', err);
+        }
+      } else if (type === 'user') {
+        await postsStore.fetchPosts();
+      } else {
+        console.error('че'); // сюда добавим получение юзернейма из куки например
+      }
+    };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    fetchData();
+  }, [type]);
+
   return (
     <div className={clsx('grid grid-cols-3 gap-10 px-5 p-2 text-xl justify-items-center', className)}>
       {postsStore.posts.length === 0 ?

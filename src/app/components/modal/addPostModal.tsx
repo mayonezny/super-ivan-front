@@ -29,13 +29,13 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   const [visible, setVisible] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
 
-  const handlePostUpload = async (data) => {
+  const handlePostUpload = async (data: { pic: { file: File }, title: string; content: string; }) => {
     const formData = new FormData();
     formData.append('pic', data.pic.file, data.pic.file.name);
     const pic = await postsStore.postPicImgSave(formData);
 
     if(pic){
-      const neuesPost = await postsStore.addPost({ pic: pic.url, title: data.title, author: 'ivan', content: data.content, picFilename: pic.filename }); //мок на автора, тот будет получаться из куки
+      const neuesPost: number = await postsStore.addPost({ pic: pic.url, title: data.title, author: 'ivan', content: data.content, picFilename: pic.filename }); //мок на автора, тот будет получаться из куки
       if(neuesPost){
         onClose();
         reset();
@@ -90,14 +90,7 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
               <ImageUploader controllerField={field} className='flex-1'/>
             )}/>
           {errors.pic && <span className='flex text-red-500 text-sm flex-[0.1] items-center relative -top-2'>{errors.pic.message}</span>}
-          {/* <input className='bg-[#f0f0f0] rounded-lg w-full p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0]' placeholder='Картинка... (норм поле в разработке)'></input> */}
           <Button type='submit' className='bg-blue-700 text-white hover:bg-blue-800'>Опубликовать</Button>
-          {/* <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-          onClick={onClose}
-        >
-            Закрыть
-        </button> */}
         </div>
       </div>
     </form>

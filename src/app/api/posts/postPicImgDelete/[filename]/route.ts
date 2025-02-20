@@ -9,12 +9,9 @@ export async function DELETE(req: NextRequest, { params }: { params: { filename:
   }
   try {
     const response = await axios.delete(`${outerApi}/posts/postPicImgDelete/${filename}`); // Это твой сервер Nest.js
-    if (!response.ok) {
-      return NextResponse.json({ error: 'Ошибка при удалении фотографии с хранилища MinIO' }, { status: response.status });
-    }
 
     // Возвращаем данные, полученные от сервера Nest.js
-    return NextResponse.json({ message: 'Фотография удалена' }, { status: 200 });
+    return NextResponse.json({ message: 'Фотография удалена' }, { status: response.status });
   } catch (error) {
     console.error('Error fetching data from Nest.js server:', error);
 

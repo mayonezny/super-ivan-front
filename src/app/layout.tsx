@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import React from 'react';
 // eslint-disable-next-line camelcase
 import { Geist, Inter, Roboto_Condensed, UnifrakturMaguntia } from 'next/font/google';
 import './globals.css';

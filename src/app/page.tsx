@@ -1,7 +1,5 @@
 
-import axios from 'axios';
 import ClickMenu from './client-components/main-page/ClickMenu';
-import Card from './components/blog/postCard';
 import BlogMenu from './components/blog/postsContainer';
 import Header from './components/header/header';
 import MainLayout from './layouts/mainLayout';
@@ -14,7 +12,7 @@ export interface Post {
   title: string;
   author: string;
   date?: Date;
-  content: string;
+  content?: string;
   picFilename?: string;
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import { makeAutoObservable, runInAction } from 'mobx';
 import axios from 'axios';
 import { Post } from '../app/page';
@@ -16,7 +17,7 @@ class PostsStore {
     this.loading = true;
     try {
 
-      const response = await axios.get(`${innerApi}/posts/getposts${keyword ? `?keyword=${keyword}` : ''}`);
+      const response = await axios.get<Post[]>(`${innerApi}/posts/getposts${keyword ? `?keyword=${keyword}` : ''}`);
       runInAction(() => {
         this.posts = response.data;
         this.loading = false;
@@ -26,57 +27,58 @@ class PostsStore {
         this.error = 'Ошибка загрузки постов';
         this.loading = false;
       });
+      console.error('Ошибка при загрузке постов!', err);
 
     }
   }
 
-  async postPicImgSave(formData: FormData) {
+  async postPicImgSave(formData: FormData): Promise<{ url: string; filename: string; }> {
     try {
-      const response = await axios.post(`${innerApi}/posts/postPicImgSave`, formData, {
+      const response = await axios.post<{ url: string; filename: string; }>(`${innerApi}/posts/postPicImgSave`, formData, {
         headers:{
           'Content-Type': 'multipart/form-data',
         },
       });
       return { url: response.data.url, filename: response.data.filename};
     } catch (err) {
-      console.error('Ошибка при добавлении поста');
-      return undefined;
+      console.error('Ошибка при добавлении поста', err);
+      return { url: 'error', filename: 'error' };
     }
   }
 
+  // eslint-disable-next-line consistent-return
   async postPicImgDelete(filename:string){
     try {
-      const response = await axios.delete(`${innerApi}/posts/postPicImgDelete/${filename}`);
-      return { message: 'Фотография удалена!'};
+      await axios.delete(`${innerApi}/posts/postPicImgDelete/${filename}`);
     } catch (err) {
       return console.error('Ошибка при удалении фотографии из хранилища MinIO', err);
     }
   }
 
-  async addPost(post: Post) {
+  async addPost(post: Post): Promise<number> {
     try {
-      const response = await axios.post(`${innerApi}/posts/addPost`, post);
+      const response = await axios.post<Post>(`${innerApi}/posts/addPost`, post);
       runInAction(() => {
         this.posts.push(response.data);
       });
-      return response.data.id; // Добавляем новый пост
+      return response.data.id!; // Добавляем новый пост
     } catch (err) {
       console.error('Ошибка при добавлении поста', err);
-      return null;
+      return -1;
     }
   }
 
-  async updatePost(postId: number, updatedPost: Post) {
-    try {
-      const response = await axios.put(`/api/posts/${postId}`, updatedPost);
-      const index = this.posts.findIndex(p => p.id === postId);
-      if (index !== -1) {
-        this.posts[index] = response.data; // Обновляем пост
-      }
-    } catch (err) {
-      console.error('Ошибка при обновлении поста');
-    }
-  }
+  // async updatePost(postId: number, updatedPost: Post) {
+  //   try {
+  //     const response = await axios.put(`/api/posts/${postId}`, updatedPost);
+  //     const index = this.posts.findIndex(p => p.id === postId);
+  //     if (index !== -1) {
+  //       this.posts[index] = response.data; // Обновляем пост
+  //     }
+  //   } catch (err) {
+  //     console.error('Ошибка при обновлении поста', err);
+  //   }
+  // }
 
   async deletePost(postId: number) {
     try {
@@ -85,13 +87,13 @@ class PostsStore {
         this.posts = this.posts.filter(post => post.id !== postId); // Удаляем пост
       });
     } catch (err) {
-      console.error('Ошибка при удалении поста');
+      console.error('Ошибка при удалении поста', err);
     }
   }
 
   findPostById(id: number){
     const post = this.posts.find(post => post.id === id);
-    return post ? post : console.warn('Пост не найден');
+    return post;
   }
 }
 
