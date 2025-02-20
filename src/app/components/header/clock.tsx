@@ -11,6 +11,11 @@ const Clock = () => {
   useEffect(() => {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setTimezone(timezone);
+    const zonedTime = toZonedTime(new Date(), timezone);
+    setTime({
+      hours: format(zonedTime, 'HH'),
+      minutes: format(zonedTime, 'mm'),
+    });
 
     const interval = setInterval(() => {
       const zonedTime = toZonedTime(new Date(), timezone);
