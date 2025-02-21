@@ -39,3 +39,7 @@ body {
 .filepond-label:hover{
   cursor: pointer;
 }
+
+.card-default{
+  background-image: url('../../public/babka.png');
+}

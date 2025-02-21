@@ -3,6 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import axios from 'axios';
 import { Post } from '../app/page';
 import { innerApi } from 'imp/utils/constants/endpoints';
+import { updatableData } from 'imp/app/components/blog/postCard';
 class PostsStore {
   posts: Post[] = [];
   loading: boolean = false;
@@ -57,7 +58,7 @@ class PostsStore {
 
   async addPost(post: Post): Promise<number> {
     try {
-      const response = await axios.post<Post>(`${innerApi}/posts/addPost`, post);
+      const response = await axios.post<Post>(`${innerApi}/posts/addpost`, post);
       runInAction(() => {
         this.posts.push(response.data);
       });
@@ -68,17 +69,19 @@ class PostsStore {
     }
   }
 
-  // async updatePost(postId: number, updatedPost: Post) {
-  //   try {
-  //     const response = await axios.put(`/api/posts/${postId}`, updatedPost);
-  //     const index = this.posts.findIndex(p => p.id === postId);
-  //     if (index !== -1) {
-  //       this.posts[index] = response.data; // Обновляем пост
-  //     }
-  //   } catch (err) {
-  //     console.error('Ошибка при обновлении поста', err);
-  //   }
-  // }
+  async updatePost(id: number, updatedPost: updatableData) {
+    try {
+      const response = await axios.put<updatableData>(`${innerApi}/posts/updatepost/${id}`, updatedPost);
+      const index = this.posts.findIndex(post => post.id === id);
+      console.log(response.data, 'ccocaofd');
+      if (index !== -1) {
+        this.posts[index].title = response.data.title; // Обновляем пост
+        this.posts[index].content = response.data.content;
+      }
+    } catch (err) {
+      console.error('Ошибка при обновлении поста', err);
+    }
+  }
 
   async deletePost(postId: number) {
     try {

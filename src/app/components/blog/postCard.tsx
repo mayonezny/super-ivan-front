@@ -14,12 +14,17 @@ import Checkmark from '../../../../public/icons/Checkmark';
 import TextareaAutosize from 'react-textarea-autosize';
 import Sun from '../../../../public/icons/sun';
 import clsx from 'clsx';
+
 type PostCard = Post & {as : ElementType, edit: boolean}
+export type updatableData = { title: string, content: string }
+
 const addPostSchema = yup.object({
   title: yup.string().min(6, 'Заголовок должен содержать не менее 6 символов!').max(40, 'Заголовок должен содержать не более 40 символов!').required('Пожалуйста, укажите заголовок'),
   content: yup.string().min(20, 'Содержимое поста должно быть не менее 20 символов!').max(1000, 'Обалдеть какое здоровое содержимое!').required('Пожалуйста, укажите содержание поста'),
 }).required();
+
 const Card = ({ id, href, pic, title, author, date, picFilename, content, ...props }: PostCard) => {
+
   const {
     register,
     reset,
@@ -28,24 +33,34 @@ const Card = ({ id, href, pic, title, author, date, picFilename, content, ...pro
   } = useForm({
     resolver: yupResolver(addPostSchema), // передаем схему валидации
   });
+
   const {
     as,
     edit,
   } = props;
+
   const Component = edit ? 'div' : as;
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [contentColorBlack, setContentColorBlack] = useState(false);
+
   const handlePostDelete = async () => {
     await postsStore.deletePost(Number(id));
     await postsStore.postPicImgDelete(String(picFilename));
   };
-  const handlePostUpdate =  () => {
-    console.error('eblan');
+
+  const handlePostUpdate =  async (data: updatableData) => {
+    if(data.content === postsStore.findPostById(Number(id))?.content && data.title === postsStore.findPostById(Number(id))?.title) return;
+    else{
+      await postsStore.updatePost(Number(id), data);
+      setEditMode(false);
+    }
   };
+
   return (
 
-    <div className="relative shadow-[0px_0px_10px_rgba(0,0,0,0.2)] bg-white rounded-lg flex justify-between bg-cover bg-center transition-transform duration-300 hover:scale-105 2xl:w-card-2xl 2xl:h-card-2xl xl:w-card-xl xl:h-card-xl" style={{ backgroundImage: `url(${pic})` }}>
+    <div className="card-default relative shadow-[0px_0px_10px_rgba(0,0,0,0.2)] bg-white rounded-lg flex justify-between bg-cover bg-center transition-transform duration-300 hover:scale-105 2xl:w-card-2xl 2xl:h-card-2xl xl:w-card-xl xl:h-card-xl" style={{ backgroundImage: `url(${pic})` }}>
       { }
       <Component href={!edit ? href : null} onClick={edit ? editMode ? () => {} : () => setMenuOpen(!menuOpen) : () => {}}>
         <form onSubmit={handleSubmit(handlePostUpdate)}>
