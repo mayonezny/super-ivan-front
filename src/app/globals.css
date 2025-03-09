@@ -43,3 +43,43 @@ body {
 .card-default{
   background-image: url('../../public/babka.png');
 }
+
+.animate-button-text-enter {
+  animation: button-text-animation-enter 1.5s forwards ease-in -1s;
+}
+
+.animate-button-text-leave {
+  animation: button-text-animation-leave 1.5s forwards ease-in;
+}
+
+@keyframes button-text-animation-enter {
+  from{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0;
+  }
+  80%{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+    transform: translateX(122px);
+  }
+}
+@keyframes button-text-animation-leave {
+  from{
+    opacity: 1;
+    transform: translateX(122px);
+  }
+  20%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0;
+  }
+  to{
+    opacity: 0;
+    transform: translateX(0px);
+  }
+}

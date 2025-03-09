@@ -5,7 +5,7 @@ import { ImBubble } from 'react-icons/im';
 const ProfileNavbar = () => {
 
   return (
-    <div className="flex w-2/6 items-center gap-5 justify-center bg-white p-2 px-3 shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-xl font-[family-name:var(--font-inter)] h-[10%]">
+    <div className="flex w-fit h-fit items-center gap-5 justify-center bg-white px-3 p-2 shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-xl font-[family-name:var(--font-inter)]">
       <div className='svg-icon'>
         <HiMiniIdentification title='Профиль' size={24} color='#666'/>
       </div>

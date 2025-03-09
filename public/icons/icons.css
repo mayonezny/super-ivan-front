@@ -8,6 +8,16 @@
     cursor: pointer; /* Темнее начального цвета */
   }
 
+.svg-icon-react-icons {
+  transition: color 0.3s ease;
+  color: #666; /* Плавное изменение цвета */
+}
+  .svg-icon-react-icons:hover * {
+    color: #444;
+    cursor: pointer; /* Темнее начального цвета */
+  }
+
+
 .no-hover:hover * {
   fill: #666;
   cursor: default;

@@ -5,7 +5,7 @@ const ProfileLayout = ({ children, className }: LayoutProps ) => {
 
   return (
 
-    <div className={clsx('w-[30%]', className)}>
+    <div className={clsx('w-[40%]', className)}>
       {children}
     </div>
   );
