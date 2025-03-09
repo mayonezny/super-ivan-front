@@ -18,7 +18,7 @@ export interface Post {
 
 export default function MainPage() {
   return (
-    <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-50">
+    <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-100">
       <Header/>
       <MainLayout>
         <div className='flex justify-between'>

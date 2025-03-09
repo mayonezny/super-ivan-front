@@ -26,12 +26,14 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   } = useForm({
     resolver: yupResolver(addPostSchema), // передаем схему валидации
   });
+
   const [visible, setVisible] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
 
   const handlePostUpload = async (data: { pic: { file: File }, title: string; content: string; }) => {
     const formData = new FormData();
     formData.append('pic', data.pic.file, data.pic.file.name);
+
     const pic = await postsStore.postPicImgSave(formData);
 
     if(pic){
@@ -79,10 +81,13 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           }`)}
         >
           <h2 className="text-3xl font-medium text-center">Новый пост:</h2>
+
           <input {...register('title')} className={clsx('bg-[#f0f0f0] rounded-lg w-full p-2 xl:p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0]',(!errors.title && (errors.content || errors.pic)) ? 'mb-2' : '')} placeholder='Заголовок...'></input>
           {errors.title && <span className='flex text-red-500 text-sm items-center -mb-[3px] -mt-[3px] ml-2'>{errors.title.message}</span>}
+
           <textarea {...register('content')} className={clsx('bg-[#f0f0f0] rounded-lg flex-1 w-full h-full p-2 xl:p-3 font-[family-name:var(--font-roboto-c)] resize-none text-clip focus:outline-none placeholder:px-[2px] placeholder:text-[#a0a0a0]', (!errors.content && (errors.title || errors.pic)) ? 'mb-2' : '')} placeholder='Контент...'></textarea>
           {errors.content && <span className='flex text-red-500 text-sm items-center -mb-[3px] -mt-[3px] ml-2'>{errors.content.message}</span>}
+
           <Controller
             name='pic'
             control={control}
@@ -90,6 +95,7 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
               <ImageUploader controllerField={field} className='flex-1'/>
             )}/>
           {errors.pic && <span className='flex text-red-500 text-sm items-center -mt-4 ml-2'>{errors.pic.message}</span>}
+
           <Button type='submit' className='mt-auto bg-blue-700 text-white hover:bg-blue-800'>Опубликовать</Button>
         </div>
       </div>

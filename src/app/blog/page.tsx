@@ -8,7 +8,7 @@ import MainLayout from '../layouts/mainLayout';
 const BlogPage = () => {
 
   return (
-    <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-50">
+    <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-100">
       <Header/>
       <MainLayout className='flex flex-col gap-5'>
         <div className='flex justify-between'>

@@ -93,7 +93,7 @@ const Card = ({ id, href, pic, title, author, date, picFilename, content, ...pro
       {menuOpen && (
         <div className="absolute bottom-0 rounded-lg *:rounded-lg left-0 w-full bg-white shadow-lg p-4 *:px-4 transition-transform duration-300 transform translate-y-0 text-lg">
 
-          <button className="w-full text-left p-2 hover:bg-gray-100">{/*мок, не мок будет када придумаем интерфейс норм просмотра постов*/}
+          <button className="w-full text-left p-2 hover:bg-gray-100">
             <div className='flex *:w-full'>
               <Link href={String(href)}>Открыть содержимое</Link>
             </div>

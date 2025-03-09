@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ReactNode } from 'react';
-type LayoutProps = {
+export type LayoutProps = {
   children: ReactNode;
   className?: string;
 }

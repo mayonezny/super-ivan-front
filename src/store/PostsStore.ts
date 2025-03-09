@@ -73,7 +73,7 @@ class PostsStore {
     try {
       const response = await axios.put<updatableData>(`${innerApi}/posts/updatepost/${id}`, updatedPost);
       const index = this.posts.findIndex(post => post.id === id);
-      console.log(response.data, 'ccocaofd');
+
       if (index !== -1) {
         this.posts[index].title = response.data.title; // Обновляем пост
         this.posts[index].content = response.data.content;
