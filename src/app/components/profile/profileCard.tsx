@@ -6,7 +6,7 @@ const ProfileCard = () => {
 
   return (
     <div className='flex gap-3 items-center'>
-      <ProfilePic/>
+      <ProfilePic size={128}/>
       <div className='flex flex-col'>
         <h1 className='text-xl font-bold'>Иван Запарьянц</h1>
         <div className='flex justify-around gap-2'>
