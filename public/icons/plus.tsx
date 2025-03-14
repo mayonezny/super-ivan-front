@@ -1,3 +1,4 @@
+'use client';
 import './icons.css';
 const Plus = ({ ...props }) => {
   const {

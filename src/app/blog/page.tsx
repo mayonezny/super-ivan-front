@@ -1,8 +1,11 @@
 
+import Filter from '../../../public/icons/filter';
+import Plus from '../../../public/icons/plus';
 import ModalContainer from '../components/blog/modalContainer';
 import BlogMenu from '../components/blog/postsContainer';
 import Header from '../components/header/header';
 import SearchMenu from '../components/misc/searchMenu';
+import AddPostModal from '../components/modal/addPostModal';
 import MainLayout from '../layouts/mainLayout';
 
 const BlogPage = () => {
@@ -14,7 +17,9 @@ const BlogPage = () => {
         <div className='flex justify-between'>
           <h1 className='text-4xl'>Мои посты</h1>
           <div className='flex gap-5'>
-            <ModalContainer/>
+            <ModalContainer ModalTrigger={Plus} Modal={AddPostModal} className='flex justify-between items-center w-24 p-2 pr-3 shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-3xl bg-white'>
+              <Filter/>
+            </ModalContainer>
             <SearchMenu type='blog'/>
           </div>
 

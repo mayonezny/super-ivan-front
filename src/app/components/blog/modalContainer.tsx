@@ -1,17 +1,20 @@
 'use client';
+import React from 'react';
+import { ReactNode, useState } from 'react';
+interface ModalContainerProps {
+  ModalTrigger: React.ComponentType<{ onClick: () => void }>;
+  Modal: React.ComponentType<{ isOpen: boolean; onClose: () => void }>;
+  children?: ReactNode;
+  className?: string;
+}
 
-import { useState } from 'react';
-import Filter from '../../../../public/icons/filter';
-import Plus from '../../../../public/icons/plus';
-import AddPostModal from '../modal/addPostModal';
-
-const ModalContainer = () => {
+const ModalContainer = ({ ModalTrigger, Modal, children, className }: ModalContainerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className='flex justify-between items-center w-24 p-2 pr-3 shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-3xl bg-white'>
-      <Plus onClick={() => setIsOpen(true)}/>
-      <Filter/>
-      <AddPostModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    <div className={className}>
+      <ModalTrigger onClick={() => setIsOpen(true)}/>
+      {children}
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 };
