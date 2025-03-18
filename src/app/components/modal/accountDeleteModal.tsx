@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { FaSadCry } from 'react-icons/fa';
+import { PiMaskSadFill } from 'react-icons/pi';
 
 const AccountDeleteModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
 
@@ -48,11 +48,11 @@ const AccountDeleteModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
           showAnimation ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`)}
       >
-        <FaSadCry size={64}/>
-        <h1 className='2xl:text-xl xl:text-lg'>Вы уверены, что хотите удалить аккаунт?</h1>
+        <PiMaskSadFill size={64} className='opacity-70'/>
+        <h1 className='opacity-70 2xl:text-xl xl:text-lg text-center'>Вы уверены, что хотите удалить аккаунт?</h1>
         <h2 className='opacity-55 text-xs text-center'>Данная операция необратима и повлечет полное удаление всех данных о Вас, включая Ваши посты</h2>
         <div className='flex gap-2'>
-          <button className='p-2 px-4 bg-red-600 rounded-md text-white'>Удалить</button>
+          <button className='p-2 px-4 bg-red-600 hover:bg-red-700 duration-300 rounded-md text-white'>Удалить</button>
           <button onClick={() => {onClose();}} className='p-2 px-4 shadow-[0px_0px_3px_rgba(0,0,0,0.4)] rounded-md'>Отмена</button>
         </div>
       </div>

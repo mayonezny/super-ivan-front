@@ -28,7 +28,7 @@ const ProfilePage = () => {
   return (
     <div className="z-0 flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-100">
       <Header/>
-      <ProfileLayout className='z-10 flex justify-center items-center gap-5'>
+      <ProfileLayout className='relative z-10 flex justify-center items-center gap-5'>
         <div className='flex flex-col items-center gap-5'>
           <ProfileNavbar activePage={activePage} setActivePage={setActivePage} setPrevActivePage={setPrevActivePage} setNextActivePage={setNextActivePage}/>
           <AnimatePresence mode="wait">
@@ -44,7 +44,7 @@ const ProfilePage = () => {
             </motion.div>
           </AnimatePresence>
         </div>
-        <ProfilePreferencesNavbar className='absolute z-50 top-[200px] 2xl:right-[29.8%] xl:right-[355px]'/>
+        <ProfilePreferencesNavbar className='absolute z-50 top-[90px] 2xl:right-[10px] xl:right-[-70px] lg:right-[-120px] md:right-[-160px] sm:right-[-200px] right-[-240px]'/>
 
       </ProfileLayout>
     </div>

@@ -47,9 +47,9 @@ const LogoutModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           showAnimation ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`)}
       >
-        <h1 className='2xl:text-xl xl:text-lg'>Вы уверены, что хотите выйти?</h1>
+        <h1 className='2xl:text-xl xl:text-lg opacity-70'>Вы уверены, что хотите выйти?</h1>
         <div className='flex gap-2'>
-          <button className='p-2 px-4 bg-blue-600 rounded-md text-white hover:bg-blue-700'>Выйти</button>
+          <button className='p-2 px-4 bg-blue-600 hover:bg-blue-700 duration-300 rounded-md text-white'>Выйти</button>
           <button onClick={() => {onClose();}} className='p-2 px-4 shadow-[0px_0px_3px_rgba(0,0,0,0.4)] rounded-md'>Отмена</button>
         </div>
       </div>
