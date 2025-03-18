@@ -29,7 +29,6 @@ const ProfilePage = () => {
     <div className="z-0 flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-100">
       <Header/>
       <ProfileLayout className='z-10 flex justify-center items-center gap-5'>
-        <ProfilePreferencesNavbar disabled/>
         <div className='flex flex-col items-center gap-5'>
           <ProfileNavbar activePage={activePage} setActivePage={setActivePage} setPrevActivePage={setPrevActivePage} setNextActivePage={setNextActivePage}/>
           <AnimatePresence mode="wait">

@@ -1,7 +1,7 @@
 
 import Filter from '../../../public/icons/filter';
 import Plus from '../../../public/icons/plus';
-import ModalContainer from '../components/blog/modalContainer';
+import ModalContainer from '../components/modal/modalContainer';
 import BlogMenu from '../components/blog/postsContainer';
 import Header from '../components/header/header';
 import SearchMenu from '../components/misc/searchMenu';

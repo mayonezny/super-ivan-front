@@ -4,6 +4,10 @@ import { MdDelete } from 'react-icons/md';
 import { IoLogIn } from 'react-icons/io5';
 import clsx from 'clsx';
 import { useState } from 'react';
+import LogoutModal from '../modal/logoutModal';
+import ModalContainer from '../modal/modalContainer';
+import AccountDeleteModal from '../modal/accountDeleteModal';
+import AccountEditModal from '../modal/accountEditModal';
 interface ProfilePreferencesNavbarProps {
     disabled?: boolean;
     className?: string;
@@ -18,15 +22,15 @@ const ProfilePreferencesNavbar = ({ disabled, className }: ProfilePreferencesNav
         clsx('flex flex-col items-center gap-4 bg-white p-2 py-3 shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-xl font-[family-name:var(--font-inter)]',
           disabled ? 'opacity-0 pointer-events-none' : '')
       }>
-        <div className='svg-icon' onMouseEnter={() => setEditHovered(true)} onMouseLeave={() => setEditHovered(false)}>
-          <HiPencilAlt size={26} color='#666'/>
+        <div onMouseEnter={() => setEditHovered(true)} onMouseLeave={() => setEditHovered(false)}>
+          <ModalContainer ModalTrigger={HiPencilAlt} triggerProps={{ size: 26, color: '#666', className: 'svg-icon'}} Modal={AccountEditModal}/>
         </div>
 
-        <div className='svg-icon-react-icons' onMouseEnter={() => setDeleteHovered(true)} onMouseLeave={() => setDeleteHovered(false)}>
-          <MdDelete size={26} color='#666'/>
+        <div onMouseEnter={() => setDeleteHovered(true)} onMouseLeave={() => setDeleteHovered(false)}>
+          <ModalContainer ModalTrigger={MdDelete} triggerProps={{ size: 26, className: 'svg-icon-react-icons'}} Modal={AccountDeleteModal}/>
         </div>
-        <div className='svg-icon' onMouseEnter={() => setLogoutHovered(true)} onMouseLeave={() => setLogoutHovered(false)}>
-          <IoLogIn size={26} color='#666' />
+        <div onMouseEnter={() => setLogoutHovered(true)} onMouseLeave={() => setLogoutHovered(false)}>
+          <ModalContainer ModalTrigger={IoLogIn} triggerProps={{ size: 26, color: '#666', className: 'svg-icon'}} Modal={LogoutModal}/>
         </div>
 
       </div>

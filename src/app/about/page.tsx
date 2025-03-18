@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Header from '../components/header/header';
 import { MdDelete } from 'react-icons/md';
 import { GiHeartWings } from 'react-icons/gi';
-import UploadProgress from './labo';
+import Messages from './labo';
 const AboutPage = () => {
   const tv = {
     brand: 'Samsung',
@@ -44,27 +44,29 @@ const AboutPage = () => {
   return (
     <div className="flex flex-col gap-4 items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)]">
       <Header/>
-      <div className="border p-4 rounded-lg shadow-md">
-        <h2 className="text-xl font-bold mb-4">Телевизор {tv.brand} {tv.model}</h2>
-        <div className="space-y-2">
-          {mas.map((label, index) => (
-            <div
-              key={index}
-              className={`flex p-2 justify-between rounded ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'} ${actives[index] === 0 ? 'opacity-50' : ''}`}
-            >
-              <div><strong>{label}:</strong> {mas[index] === 'Матрица' ? tv['matrix'] : mas[index] === 'Диагональ экрана' ? tv['screenSize'] : mas[index] === 'Серийный номер' ? tv['serialNumber'] : randword[Math.floor(Math.random() * randword.length)]}</div>
-              <div className='flex'>
-                <MdDelete onClick={() => removeElement(index)} className={`svg-icon-react-icons ${actives[index] === 1 ? 'opacity-100' : 'opacity-0'}`} size={26} color='#666'/>
-                <GiHeartWings onClick={() => resurrectElement(index)} className={`svg-icon-react-icons ${actives[index] === 0 ? 'opacity-100' : 'opacity-0'}`} size={26} color='#000'/>
-              </div>
+      <div className='flex'>
+        <div className="border p-4 rounded-lg shadow-md h-fit">
+          <h2 className="text-xl font-bold mb-4">Телевизор {tv.brand} {tv.model}</h2>
+          <div className="space-y-2">
+            {mas.map((label, index) => (
+              <div
+                key={index}
+                className={`flex p-2 justify-between rounded ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'} ${actives[index] === 0 ? 'opacity-50' : ''}`}
+              >
+                <div><strong>{label}:</strong> {mas[index] === 'Матрица' ? tv['matrix'] : mas[index] === 'Диагональ экрана' ? tv['screenSize'] : mas[index] === 'Серийный номер' ? tv['serialNumber'] : randword[Math.floor(Math.random() * randword.length)]}</div>
+                <div className='flex'>
+                  <MdDelete onClick={() => removeElement(index)} className={`svg-icon-react-icons ${actives[index] === 1 ? 'opacity-100' : 'opacity-0'}`} size={26} color='#666'/>
+                  <GiHeartWings onClick={() => resurrectElement(index)} className={`svg-icon-react-icons ${actives[index] === 0 ? 'opacity-100' : 'opacity-0'}`} size={26} color='#000'/>
+                </div>
 
-            </div>
-          ))}
-          <button onClick={addElement} className='p-2 rounded w-full bg-gradient-to-r from-gray-100 via-green-500 to-gray-100 text-white'><h1 className='text-center'>Добавить элемент</h1></button>
-          {/* <button onClick={removeElement} className='p-2 rounded w-full bg-gradient-to-r from-gray-100 via-red-500 to-gray-100 text-white'><h1 className='text-center'>Удалить</h1></button> */}
+              </div>
+            ))}
+            <button onClick={addElement} className='p-2 rounded w-full bg-gradient-to-r from-gray-100 via-green-500 to-gray-100 text-white'><h1 className='text-center'>Добавить элемент</h1></button>
+            {/* <button onClick={removeElement} className='p-2 rounded w-full bg-gradient-to-r from-gray-100 via-red-500 to-gray-100 text-white'><h1 className='text-center'>Удалить</h1></button> */}
+          </div>
         </div>
+        <Messages/>
       </div>
-      <UploadProgress/>
     </div>
   );
 };
