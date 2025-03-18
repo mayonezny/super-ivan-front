@@ -26,7 +26,7 @@ const ProfilePage = () => {
   const CurrentComponent = components[activePage];
 
   return (
-    <div className="z-0 flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-100">
+    <div className="z-0 flex flex-col items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-100">
       <Header/>
       <ProfileLayout className='relative z-10 flex justify-center items-center gap-5'>
         <div className='flex flex-col items-center gap-5'>
