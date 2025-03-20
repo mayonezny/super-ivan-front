@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { makeAutoObservable, runInAction } from 'mobx';
-import axios from 'axios';
+import api from 'axios';
 import { Post } from '../app/page';
 import { innerApi } from 'imp/utils/constants/endpoints';
 import { updatableData } from 'imp/app/components/blog/postCard';
@@ -18,7 +18,7 @@ class PostsStore {
     this.loading = true;
     try {
 
-      const response = await axios.get<Post[]>(`${innerApi}/posts/getposts${keyword ? `?keyword=${keyword}` : ''}`);
+      const response = await api.get<Post[]>(`${innerApi}/posts/getposts${keyword ? `?keyword=${keyword}` : ''}`);
       runInAction(() => {
         this.posts = response.data;
         this.loading = false;
@@ -35,7 +35,7 @@ class PostsStore {
 
   postPicImgSave = async (formData: FormData): Promise<{ url: string; filename: string; }> => {
     try {
-      const response = await axios.post<{ url: string; filename: string; }>(`${innerApi}/posts/postPicImgSave`, formData, {
+      const response = await api.post<{ url: string; filename: string; }>(`${innerApi}/posts/postPicImgSave`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -50,7 +50,7 @@ class PostsStore {
   // eslint-disable-next-line consistent-return
   postPicImgDelete = async (filename: string) => {
     try {
-      await axios.delete(`${innerApi}/posts/postPicImgDelete/${filename}`);
+      await api.delete(`${innerApi}/posts/postPicImgDelete/${filename}`);
     } catch (err) {
       return console.error('Ошибка при удалении фотографии из хранилища MinIO', err);
     }
@@ -58,7 +58,7 @@ class PostsStore {
 
   addPost = async (post: Post): Promise<number> => {
     try {
-      const response = await axios.post<Post>(`${innerApi}/posts/addpost`, post);
+      const response = await api.post<Post>(`${innerApi}/posts/addpost`, post);
       runInAction(() => {
         this.posts.push(response.data);
       });
@@ -71,7 +71,7 @@ class PostsStore {
 
   updatePost = async (id: number, updatedPost: updatableData) => {
     try {
-      const response = await axios.put<updatableData>(`${innerApi}/posts/updatepost/${id}`, updatedPost);
+      const response = await api.put<updatableData>(`${innerApi}/posts/updatepost/${id}`, updatedPost);
       const index = this.posts.findIndex(post => post.id === id);
 
       if (index !== -1) {
@@ -85,7 +85,7 @@ class PostsStore {
 
   deletePost = async (postId: number) => {
     try {
-      await axios.delete(`${innerApi}/posts/deletepost/${postId}`);
+      await api.delete(`${innerApi}/posts/deletepost/${postId}`);
       runInAction(() => {
         this.posts = this.posts.filter(post => post.id !== postId); // Удаляем пост
       });
