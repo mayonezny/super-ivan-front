@@ -13,7 +13,7 @@ class PostsStore {
     makeAutoObservable(this, {}, { autoBind: true });
   }
 
-  async fetchPosts(keyword?: string) {
+  fetchPosts = async (keyword?: string) => {
     if (this.loading) return;
     this.loading = true;
     try {
@@ -33,14 +33,14 @@ class PostsStore {
     }
   }
 
-  async postPicImgSave(formData: FormData): Promise<{ url: string; filename: string; }> {
+  postPicImgSave = async (formData: FormData): Promise<{ url: string; filename: string; }> => {
     try {
       const response = await axios.post<{ url: string; filename: string; }>(`${innerApi}/posts/postPicImgSave`, formData, {
-        headers:{
+        headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      return { url: response.data.url, filename: response.data.filename};
+      return { url: response.data.url, filename: response.data.filename };
     } catch (err) {
       console.error('Ошибка при добавлении поста', err);
       return { url: 'error', filename: 'error' };
@@ -48,7 +48,7 @@ class PostsStore {
   }
 
   // eslint-disable-next-line consistent-return
-  async postPicImgDelete(filename:string){
+  postPicImgDelete = async (filename: string) => {
     try {
       await axios.delete(`${innerApi}/posts/postPicImgDelete/${filename}`);
     } catch (err) {
@@ -56,7 +56,7 @@ class PostsStore {
     }
   }
 
-  async addPost(post: Post): Promise<number> {
+  addPost = async (post: Post): Promise<number> => {
     try {
       const response = await axios.post<Post>(`${innerApi}/posts/addpost`, post);
       runInAction(() => {
@@ -69,7 +69,7 @@ class PostsStore {
     }
   }
 
-  async updatePost(id: number, updatedPost: updatableData) {
+  updatePost = async (id: number, updatedPost: updatableData) => {
     try {
       const response = await axios.put<updatableData>(`${innerApi}/posts/updatepost/${id}`, updatedPost);
       const index = this.posts.findIndex(post => post.id === id);
@@ -83,7 +83,7 @@ class PostsStore {
     }
   }
 
-  async deletePost(postId: number) {
+  deletePost = async (postId: number) => {
     try {
       await axios.delete(`${innerApi}/posts/deletepost/${postId}`);
       runInAction(() => {
@@ -94,7 +94,7 @@ class PostsStore {
     }
   }
 
-  findPostById(id: number){
+  findPostById = (id: number) => {
     const post = this.posts.find(post => post.id === id);
     return post;
   }
