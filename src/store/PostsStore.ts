@@ -31,7 +31,7 @@ class PostsStore {
       console.error('Ошибка при загрузке постов!', err);
 
     }
-  }
+  };
 
   postPicImgSave = async (formData: FormData): Promise<{ url: string; filename: string; }> => {
     try {
@@ -45,7 +45,7 @@ class PostsStore {
       console.error('Ошибка при добавлении поста', err);
       return { url: 'error', filename: 'error' };
     }
-  }
+  };
 
   // eslint-disable-next-line consistent-return
   postPicImgDelete = async (filename: string) => {
@@ -54,7 +54,7 @@ class PostsStore {
     } catch (err) {
       return console.error('Ошибка при удалении фотографии из хранилища MinIO', err);
     }
-  }
+  };
 
   addPost = async (post: Post): Promise<number> => {
     try {
@@ -67,7 +67,7 @@ class PostsStore {
       console.error('Ошибка при добавлении поста', err);
       return -1;
     }
-  }
+  };
 
   updatePost = async (id: number, updatedPost: updatableData) => {
     try {
@@ -81,7 +81,7 @@ class PostsStore {
     } catch (err) {
       console.error('Ошибка при обновлении поста', err);
     }
-  }
+  };
 
   deletePost = async (postId: number) => {
     try {
@@ -92,12 +92,12 @@ class PostsStore {
     } catch (err) {
       console.error('Ошибка при удалении поста', err);
     }
-  }
+  };
 
   findPostById = (id: number) => {
     const post = this.posts.find(post => post.id === id);
     return post;
-  }
+  };
 }
 
 const postsStore = new PostsStore();
