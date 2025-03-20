@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { makeAutoObservable, runInAction } from 'mobx';
 import api from 'axios';
-import { Post } from '../app/page';
+import { Post } from '../utils/interfaces';
 import { innerApi } from 'imp/utils/constants/endpoints';
 import { updatableData } from 'imp/app/components/blog/postCard';
 class PostsStore {
