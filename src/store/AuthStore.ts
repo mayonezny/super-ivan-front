@@ -4,76 +4,76 @@ import { innerApi } from 'imp/utils/constants/endpoints';
 import api from 'imp/utils/axios/axios';
 import { User } from 'imp/utils/interfaces';
 
-interface authInterface{
+interface authInterface {
     login: string,
     password: string
 }
 class AuthStore {
-  isAuth: boolean = false;
-  loading: boolean = false;
-  error: string | null = null;
-  userData: User = {
-    uuid: '----',
-    token: '',
-  };
+    isAuth: boolean = false;
+    loading: boolean = false;
+    error: string | null = null;
+    userData: User = {
+        uuid: '----',
+        token: '',
+    };
 
-  constructor() {
-    makeAutoObservable(this, {}, { autoBind: true });
-  }
-
-  login = async ({ login, password }: authInterface) => {
-    let errorMessage: string = '';
-    try {
-      this.loading = true;
-      const response = await api.post<User>(`${innerApi}/auth/login`, { login, password });
-      localStorage.setItem('accessToken', response.data.token); //добавить логику для рефреш токена
-      console.log(response);
-      runInAction(() => {
-        this.isAuth = true;
-        this.userData.uuid = response.data.uuid;
-      });
-      console.log();
-    } catch (err: any) {
-      errorMessage = err.response?.data?.message || 'Сообщение не получено';
-    } finally {
-      this.loading = false;
+    constructor() {
+        makeAutoObservable(this, {}, { autoBind: true });
     }
-    return errorMessage || null;
-  };
 
-  logout = async () => {
-    try {
-      this.loading = true;
-      await api.post(`${innerApi}/auth/logout`);
-      localStorage.removeItem('accessToken'); //добавить логику для рефреш токена
-      runInAction(() => {
-        this.isAuth = false;
-      });
-    } catch (err: any) {
-      console.error(err.response?.data?.message);
-    } finally {
-      this.loading = false;
-    }
-  };
+    login = async ({ login, password }: authInterface) => {
+        let errorMessage: string = '';
+        try {
+            this.loading = true;
+            const response = await api.post<User>(`${innerApi}/auth/login`, { login, password });
+            localStorage.setItem('accessToken', response.data.token); //добавить логику для рефреш токена
+            console.log(response);
+            runInAction(() => {
+                this.isAuth = true;
+                this.userData.uuid = response.data.uuid;
+            });
+            console.log();
+        } catch (err: any) {
+            errorMessage = err.response?.data?.message || 'Сообщение не получено';
+        } finally {
+            this.loading = false;
+        }
+        return errorMessage || null;
+    };
 
-  registration = async ({ login, password }: authInterface) => {
-    let errorMessage: string = '';
-    try {
-      this.loading = true;
-      const response = await api.post<User>(`${innerApi}/auth/register`, { login, password });
-      localStorage.setItem('accessToken', response.data.token); //добавить логику для рефреш токена
-      runInAction(() => {
-        this.isAuth = true;
-        this.userData.uuid = response.data.uuid;
-      });
-    } catch (err: any) {
-      console.log(err.response?.data?.message);
-      errorMessage = err.response?.data?.message || 'Сообщение не получено';
-    } finally {
-      this.loading = false;
-    }
-    return errorMessage || null;
-  };
+    logout = async () => {
+        try {
+            this.loading = true;
+            await api.post(`${innerApi}/auth/logout`);
+            localStorage.removeItem('accessToken'); //добавить логику для рефреш токена
+            runInAction(() => {
+                this.isAuth = false;
+            });
+        } catch (err: any) {
+            console.error(err.response?.data?.message);
+        } finally {
+            this.loading = false;
+        }
+    };
+
+    register = async ({ login, password }: authInterface) => {
+        let errorMessage: string = '';
+        try {
+            this.loading = true;
+            const response = await api.post<User>(`${innerApi}/auth/register`, { login, password });
+            localStorage.setItem('accessToken', response.data.token); //добавить логику для рефреш токена
+            runInAction(() => {
+                this.isAuth = true;
+                this.userData.uuid = response.data.uuid;
+            });
+        } catch (err: any) {
+            console.log(err.response?.data?.message);
+            errorMessage = err.response?.data?.message || 'Сообщение не получено';
+        } finally {
+            this.loading = false;
+        }
+        return errorMessage || null;
+    };
 
 }
 

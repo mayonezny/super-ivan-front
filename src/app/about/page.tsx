@@ -1,9 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../components/header/header';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
 import { GiHeartWings } from 'react-icons/gi';
-import Messages from './labo';
+
 const AboutPage = () => {
   const tv = {
     brand: 'Samsung',
@@ -12,62 +12,131 @@ const AboutPage = () => {
     screenSize: '55 дюймов',
     serialNumber: '1234567890',
   };
+
   const randword = ['Перфоратор', 'Кабачки', 'Телефон', 'Вивобук', 'Буровая установка', 'Синтезатор Roland D-50', 'Стиральная машина Asus', 'Окно с теплоизоляцией', 'Иван', 'Пасхолко'];
-  const [mas, setMas] = useState(['Матрица', 'Диагональ экрана', 'Серийный номер']);
+  const [mas, setMas] = useState([
+    { label: 'Матрица', description: tv.matrix },
+    { label: 'Диагональ экрана', description: tv.screenSize },
+    { label: 'Серийный номер', description: tv.serialNumber },
+  ]);
   const [actives, setActives] = useState([1, 1, 1]);
+  const [newElement, setNewElement] = useState('');
+  const [editIndex, setEditIndex] = useState(null);
+
+  useEffect(() => {
+    const savedMas = localStorage.getItem('mas');
+    const savedActives = localStorage.getItem('actives');
+    if (savedMas && savedActives) {
+      setMas(JSON.parse(savedMas));
+      setActives(JSON.parse(savedActives));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('mas', JSON.stringify(mas));
+    localStorage.setItem('actives', JSON.stringify(actives));
+  }, [mas, actives]);
+
   const addElement = () => {
-    const rand = Math.floor(Math.random() * randword.length);
-    setMas(mas.concat(randword[rand]));
-    setActives(actives.concat(1));
+    const [label, description] = newElement.split(':');
+    if (label.trim() !== '' && description.trim() !== '') {
+      setMas([...mas, { label: label.trim(), description: description.trim() }]);
+      setActives([...actives, 1]);
+      setNewElement('');
+    }
   };
-  const removeElement = (index: number) => {
+
+  const removeElement = (index) => {
     const newActives = actives.map((element, i) => {
-      if(i === index){
+      if (i === index) {
         return 0;
-      } else{
+      } else {
         return element;
       }
     });
     setActives(newActives);
-    // setMas(mas.filter((_, i) => i !== index));
   };
-  const resurrectElement = (index: number) => {
+
+  const resurrectElement = (index) => {
     const newActives = actives.map((element, i) => {
-      if(i === index){
+      if (i === index) {
         return 1;
-      } else{
+      } else {
         return element;
       }
     });
     setActives(newActives);
   };
+
+  const editElement = (index) => {
+    setEditIndex(index);
+    setNewElement(`${mas[index].label}:${mas[index].description}`);
+  };
+
+  const saveElement = () => {
+    const [label, description] = newElement.split(':');
+    if (label.trim() !== '' && description.trim() !== '') {
+      const newMas = mas.map((element, i) => {
+        if (i === editIndex) {
+          return { label: label.trim(), description: description.trim() };
+        } else {
+          return element;
+        }
+      });
+      setMas(newMas);
+      setEditIndex(null);
+      setNewElement('');
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4 items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)]">
-      <Header/>
+      <Header />
       <div className='flex'>
         <div className="border p-4 rounded-lg shadow-md h-fit">
           <h2 className="text-xl font-bold mb-4">Телевизор {tv.brand} {tv.model}</h2>
           <div className="space-y-2">
-            {mas.map((label, index) => (
+            {mas.map((item, index) => (
               <div
                 key={index}
                 className={`flex p-2 justify-between rounded ${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'} ${actives[index] === 0 ? 'opacity-50' : ''}`}
               >
-                <div><strong>{label}:</strong> {mas[index] === 'Матрица' ? tv['matrix'] : mas[index] === 'Диагональ экрана' ? tv['screenSize'] : mas[index] === 'Серийный номер' ? tv['serialNumber'] : randword[Math.floor(Math.random() * randword.length)]}</div>
+                {editIndex === index ? (
+                  <input
+                    type="text"
+                    value={newElement}
+                    onChange={(e) => setNewElement(e.target.value)}
+                    className="border p-1 rounded"
+                  />
+                ) : (
+                  <div><strong>{item.label}:</strong> {item.description}</div>
+                )}
                 <div className='flex'>
-                  <MdDelete onClick={() => removeElement(index)} className={`svg-icon-react-icons ${actives[index] === 1 ? 'opacity-100' : 'opacity-0'}`} size={26} color='#666'/>
-                  <GiHeartWings onClick={() => resurrectElement(index)} className={`svg-icon-react-icons ${actives[index] === 0 ? 'opacity-100' : 'opacity-0'}`} size={26} color='#000'/>
+                  {editIndex === index ? (
+                    <MdEdit onClick={saveElement} className="svg-icon-react-icons opacity-100" size={26} color='#000' />
+                  ) : (
+                    <>
+                      <MdDelete onClick={() => removeElement(index)} className={`svg-icon-react-icons ${actives[index] === 1 ? 'opacity-100' : 'opacity-0'}`} size={26} color='#666' />
+                      <GiHeartWings onClick={() => resurrectElement(index)} className={`svg-icon-react-icons ${actives[index] === 0 ? 'opacity-100' : 'opacity-0'}`} size={26} color='#000' />
+                      <MdEdit onClick={() => editElement(index)} className="svg-icon-react-icons opacity-100" size={26} color='#000' />
+                    </>
+                  )}
                 </div>
-
               </div>
             ))}
-            <button onClick={addElement} className='p-2 rounded w-full bg-gradient-to-r from-gray-100 via-green-500 to-gray-100 text-white'><h1 className='text-center'>Добавить элемент</h1></button>
-            {/* <button onClick={removeElement} className='p-2 rounded w-full bg-gradient-to-r from-gray-100 via-red-500 to-gray-100 text-white'><h1 className='text-center'>Удалить</h1></button> */}
+            <input
+              type="text"
+              value={newElement}
+              onChange={(e) => setNewElement(e.target.value)}
+              placeholder="Введите название:описание"
+              className="border p-2 rounded w-full mt-4"
+            />
+            <button onClick={addElement} className='p-2 rounded w-full bg-gradient-to-r from-gray-100 via-green-500 to-gray-100 text-white mt-2'><h1 className='text-center'>Добавить элемент</h1></button>
           </div>
         </div>
-        <Messages/>
       </div>
     </div>
   );
 };
+
 export default AboutPage;
