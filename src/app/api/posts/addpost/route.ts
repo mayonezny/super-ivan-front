@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const response = await axios.post(`${outerApi}/posts/addpost`, post); // Это твой сервер Nest.js
-    return NextResponse.json(response.data, { status: 201});
+    return NextResponse.json(response.data, { status: 201 });
   } catch (error) {
     console.error('Error fetching data from Nest.js server:', error);
 

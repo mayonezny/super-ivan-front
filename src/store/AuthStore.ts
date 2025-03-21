@@ -4,7 +4,7 @@ import { innerApi } from 'imp/utils/constants/endpoints';
 import api from 'imp/utils/axios/axios';
 import { User } from 'imp/utils/interfaces';
 
-interface authInterface {
+export interface authInterface {
     login: string,
     password: string
 }
@@ -57,6 +57,7 @@ class AuthStore {
     };
 
     register = async ({ login, password }: authInterface) => {
+        console.log('l', login, 'p', password);
         let errorMessage: string = '';
         try {
             this.loading = true;
