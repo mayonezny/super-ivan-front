@@ -30,12 +30,9 @@ const RegisterPage = () => {
   });
 
   const handleRegister = async (data: registerDataInterface) => {
-    const { login, password } = {
-      login: data.email,
-      password: data.password
-    }
+    const { email, password } = data
     console.log(data);
-    const newUser = await authStore.register({ login, password });
+    const newUser = await authStore.register({ email, password });
   }
 
   return (

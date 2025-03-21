@@ -5,7 +5,7 @@ import api from 'imp/utils/axios/axios';
 import { User } from 'imp/utils/interfaces';
 
 export interface authInterface {
-    login: string,
+    email: string,
     password: string
 }
 class AuthStore {
@@ -21,11 +21,11 @@ class AuthStore {
         makeAutoObservable(this, {}, { autoBind: true });
     }
 
-    login = async ({ login, password }: authInterface) => {
+    login = async ({ email, password }: authInterface) => {
         let errorMessage: string = '';
         try {
             this.loading = true;
-            const response = await api.post<User>(`${innerApi}/auth/login`, { login, password });
+            const response = await api.post<User>(`${innerApi}/auth/login`, { email, password });
             localStorage.setItem('accessToken', response.data.token); //добавить логику для рефреш токена
             console.log(response);
             runInAction(() => {
@@ -56,12 +56,12 @@ class AuthStore {
         }
     };
 
-    register = async ({ login, password }: authInterface) => {
-        console.log('l', login, 'p', password);
+    register = async ({ email, password }: authInterface) => {
+        console.log('l', email, 'p', password);
         let errorMessage: string = '';
         try {
             this.loading = true;
-            const response = await api.post<User>(`${innerApi}/auth/register`, { login, password });
+            const response = await api.post<User>(`${innerApi}/auth/register`, { email, password });
             localStorage.setItem('accessToken', response.data.token); //добавить логику для рефреш токена
             runInAction(() => {
                 this.isAuth = true;
