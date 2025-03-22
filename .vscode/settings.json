@@ -3,7 +3,7 @@
     "security.workspace.trust.untrustedFiles": "open",
     "cmake.configureOnOpen": true,
     "git.autofetch": true,
-    "diffEditor.ignoreTrimWhitespace": true,
+    "diffEditor.ignoreTrimWhitespace": false,
     "javafx.libPath": "c:/Program Files/Java/javafx-sdk-22.0.2/lib",
     "C_Cpp.default.compilerPath": "cl.exe",
     "editor.codeActionsOnSave": {

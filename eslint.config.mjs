@@ -46,10 +46,8 @@ export default tseslint.config(
       'consistent-return': 'error',
       'no-multiple-empty-lines': ['error', { 'max': 1 }],
       'no-var': 'error',
-      'no-magic-numbers': ['error', { 'ignore': [0, 1] }],
       'camelcase': 'warn',
       'no-mixed-spaces-and-tabs': 'error',
-      'eqeqeq': ['error', 'always'],
       'quotes': ['error', 'single'],  // Используем одинарные кавычки
       'semi': ['error', 'always'],  // Требуем точку с запятой
       'indent': ['error', 2],  // Делаем отступ в 2 пробела

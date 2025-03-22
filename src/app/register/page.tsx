@@ -1,3 +1,4 @@
+
 'use client';
 import clsx from 'clsx';
 import Header from '../components/header/header';
@@ -14,11 +15,10 @@ interface registerDataInterface {
 }
 
 const registerSchema = yup.object({
-  email: yup.string().min(6, 'Поле должно содержать не менее 6 символов!').max(40, 'Поле должно содержать не более 40 символов!').matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i, 'Укажите валдиный Email').required('Пожалуйста, укажите ваш Email'),
+  email: yup.string().min(6, 'Поле должно содержать не менее 6 символов!').max(40, 'Поле должно содержать не более 40 символов!').matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i, 'Укажите валидный Email').required('Пожалуйста, укажите ваш Email'),
   password: yup.string().min(6, 'Поле должно содержать не менее 6 символов!').max(40, 'Поле должно содержать не более 40 символов!').required('Пожалуйста, введите свой пароль!'),
   confirmPassword: yup.string().oneOf([yup.ref('password')], 'Пароли должны совпадать!').required('Пожалуйста, подтвердите свой пароль'),
 }).required();
-
 
 const RegisterPage = () => {
   const {
@@ -30,10 +30,10 @@ const RegisterPage = () => {
   });
 
   const handleRegister = async (data: registerDataInterface) => {
-    const { email, password } = data
+    const { email, password } = data;
     console.log(data);
     const newUser = await authStore.register({ email, password });
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(handleRegister)}>
