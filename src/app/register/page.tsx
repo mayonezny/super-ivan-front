@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import authStore from 'imp/store/AuthStore';
+import { redirect } from 'next/navigation';
 
 interface registerDataInterface {
   email: string,
@@ -32,7 +33,10 @@ const RegisterPage = () => {
   const handleRegister = async (data: registerDataInterface) => {
     const { email, password } = data;
     console.log(data);
-    const newUser = await authStore.register({ email, password });
+    const newUser = await authStore.register({ email, password }) as string || null;
+    if(!newUser){
+      redirect('/welcome');
+    }
   };
 
   return (

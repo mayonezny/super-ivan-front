@@ -58,7 +58,7 @@ class AuthStore {
 
   register = async ({ email, password }: authInterface) => {
     console.log('l', email, 'p', password);
-    let errorMessage: string = '';
+    let errorMessage;
     try {
       this.loading = true;
       const response = await api.post<User>(`${innerApi}/auth/register`, { email, password });
