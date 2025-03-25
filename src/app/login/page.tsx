@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Header from '../components/header/header';
 import ProfileLayout from '../layouts/profileLayout';
 import { Checkbox, FormControlLabel } from '@mui/material';
+import NavButton from '../components/buttons/navButton';
 
 const LoginPage = () => {
 
@@ -19,6 +20,7 @@ const LoginPage = () => {
           <input className={clsx('bg-[#f0f0f0] rounded-lg w-full p-2 xl:p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0] text-lg')} placeholder='Пароль...'></input>
           <FormControlLabel control={<Checkbox />} label="Не запоминать аккаунт"/>
           <button className='p-2 px-4 bg-blue-500 hover:bg-blue-600 duration-300 rounded-md text-white'>Войти</button>
+          <span className='text-center'>Нет аккаунта? <NavButton href='/register' className='!px-0 text-blue-600 hover:text-blue-800 hover:underline'>Зарегистрироваться</NavButton></span>
         </div>
       </ProfileLayout>
     </div>

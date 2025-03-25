@@ -12,5 +12,6 @@ export interface Post {
   }
 export interface User{
     uuid: UUID;
-    token: string;
+    accessToken: string;
+    error?: any;
 }

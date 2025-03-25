@@ -1,8 +1,9 @@
 
 import { makeAutoObservable, runInAction } from 'mobx';
-import { innerApi } from 'imp/utils/constants/endpoints';
+import { innerApi, outerApi } from 'imp/utils/constants/endpoints';
 import api from 'imp/utils/axios/axios';
 import { User } from 'imp/utils/interfaces';
+import axios from 'axios';
 
 export interface authInterface {
     email: string,
@@ -14,7 +15,7 @@ class AuthStore {
   error: string | null = null;
   userData: User = {
     uuid: '----',
-    token: '',
+    accessToken: '',
   };
 
   constructor() {
@@ -26,7 +27,7 @@ class AuthStore {
     try {
       this.loading = true;
       const response = await api.post<User>(`${innerApi}/auth/login`, { email, password });
-      localStorage.setItem('accessToken', response.data.token); //добавить логику для рефреш токена
+      localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
       console.log(response);
       runInAction(() => {
         this.isAuth = true;
@@ -58,22 +59,32 @@ class AuthStore {
 
   register = async ({ email, password }: authInterface) => {
     console.log('l', email, 'p', password);
-    let errorMessage;
+    let errorMessage: string = '';
     try {
       this.loading = true;
-      const response = await api.post<User>(`${innerApi}/auth/register`, { email, password });
-      localStorage.setItem('accessToken', response.data.token); //добавить логику для рефреш токена
-      runInAction(() => {
-        this.isAuth = true;
-        this.userData.uuid = response.data.uuid;
-      });
+      const response = await axios.post<User>(`${innerApi}/auth/register`, { email, password }, { withCredentials: true });
+      const error: string = response.data.error?.name || '';
+      console.log(error);
+      if(response.data.accessToken !== undefined){
+        localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
+      } else{
+        if(error === 'SequelizeUniqueConstraintError'){
+          errorMessage = 'emailExists';
+        } else{
+          runInAction(() => {
+            this.isAuth = true;
+            this.userData.uuid = response.data.uuid;
+          });
+        }
+      }
+
     } catch (err: any) {
-      console.log(err.response?.data?.message);
+      console.log(err);
       errorMessage = err.response?.data?.message || 'Сообщение не получено';
     } finally {
       this.loading = false;
     }
-    return errorMessage || null;
+    return errorMessage === '' ? null : errorMessage;
   };
 
 }

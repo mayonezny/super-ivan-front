@@ -67,6 +67,9 @@ const WelcomePage = () => {
             <div className='flex flex-col gap-1 col-span-3 mt-2'>
               <button className='p-2 px-4 bg-blue-600 hover:bg-blue-700 duration-300 rounded-md text-white'>Сохранить</button>
             </div>
+            <div className='flex flex-col gap-1 col-span-3'>
+              <button className=''>Заполнить позже</button>
+            </div>
           </div>
           {/* <div
             className={clsx('mt-10 flex flex-col bg-white p-6 rounded-xl shadow-md z-10 gap-4 lg:w-[70%] w-[55%] transition-all duration-700 transform')}

@@ -1,3 +1,4 @@
+import authStore from 'imp/store/AuthStore';
 import NavButton from '../buttons/navButton';
 import Clock from './clock';
 import Image from 'next/image';
@@ -18,8 +19,8 @@ const Header = () => {
       </div>
       <Clock/>
       <div className="flex gap-8">
-        <NavButton href='/profile'>Профиль</NavButton>
-        <NavButton href='/blog'>Блог</NavButton>
+        <NavButton href={authStore.isAuth ? '/profile' : '/login'}>{authStore.isAuth ? 'Профиль' : 'Войти'}</NavButton>
+        <NavButton href={authStore.isAuth ? '/blog' : '/register'}>{authStore.isAuth ? 'Блог' : 'Создать аккаунт'}</NavButton>
 
       </div>
     </nav>

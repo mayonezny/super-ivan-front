@@ -1,14 +1,31 @@
+import axios from 'axios';
 import { authInterface } from 'imp/store/AuthStore';
 import api from 'imp/utils/axios/axios';
 import { outerApi } from 'imp/utils/constants/endpoints';
-import { NextRequest, NextResponse } from 'next/server';
+import https from 'https';
 
-export async function POST(req: NextRequest) {
-  const { email, password }: authInterface = await req.json();
+import { NextResponse } from 'next/server';
+
+export async function POST(req: Request) {
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+  const { email, password }: authInterface = await req.json() as authInterface;
   console.log('l', email, 'p', password);
   try {
-    const response = await api.post(`${outerApi}/auth/register`, { email, password }); // Это твой сервер Nest.js
-    return NextResponse.json(response.data, { status: 201 });
+    const nestresponse = await axios.post(`${outerApi}/auth/register`, { email, password }, { withCredentials: true, httpsAgent: agent }); // Это твой сервер Nest.js
+    const setCookieHeader = nestresponse.headers['set-cookie'];
+    // Например: ["refreshToken=abc123; Path=/; HttpOnly; ..."]
+    const data = nestresponse.data;
+    const response = NextResponse.json(data, { status: nestresponse.status });
+
+    // 3. Если он есть, пробрасываем его в ответ Next
+    if (setCookieHeader) {
+      console.log(setCookieHeader);
+      response.headers.set('Set-Cookie', setCookieHeader[0] ?? setCookieHeader);
+    }
+    return response;
+
   } catch (error) {
     console.error('Skibidi dop dop dop daba dop, dap daba dop', error);
 
