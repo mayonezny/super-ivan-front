@@ -71,19 +71,6 @@ const WelcomePage = () => {
               <button className=''>Заполнить позже</button>
             </div>
           </div>
-          {/* <div
-            className={clsx('mt-10 flex flex-col bg-white p-6 rounded-xl shadow-md z-10 gap-4 lg:w-[70%] w-[55%] transition-all duration-700 transform')}
-          >
-            <h1 className='text-3xl text-center mb-4'>Создать аккаунт:</h1>
-            <input {...register('email')} className={clsx('bg-[#f0f0f0] rounded-lg w-full p-2 xl:p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0] text-lg')} placeholder='Электронная почта...'></input>
-            {errors.email && <span className='flex text-red-500 text-xs items-center -mb-[8px] -mt-[8px] ml-2'>{errors.email.message}</span>}
-            <input type='password' {...register('password')} className={clsx('bg-[#f0f0f0] rounded-lg w-full p-2 xl:p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0] text-lg')} placeholder='Пароль...'></input>
-            {errors.password && <span className='flex text-red-500 text-xs items-center -mb-[8px] -mt-[8px] ml-2'>{errors.password.message}</span>}
-            <input type='password' {...register('confirmPassword')} className={clsx('bg-[#f0f0f0] rounded-lg w-full p-2 xl:p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0] text-lg')} placeholder='Подтвердить пароль...'></input>
-            {errors.confirmPassword && <span className='flex text-red-500 text-xs items-center -mb-[8px] -mt-[8px] ml-2'>{errors.confirmPassword.message}</span>}
-            <FormControlLabel control={<Checkbox />} label="Не запоминать аккаунт" />
-            <button className='p-2 px-4 bg-blue-500 hover:bg-blue-600 duration-300 rounded-md text-white'>Зарегистрироваться</button>
-          </div> */}
         </MainLayout>
       </div>
     </form>

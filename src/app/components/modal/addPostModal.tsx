@@ -1,4 +1,4 @@
-/* eslint-disable no-magic-numbers */
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -67,12 +67,12 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     <form onSubmit={handleSubmit(handlePostUpload)}>
       <div
         className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-700  ${showAnimation ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
+        }`}
       >
         {/* Оверлей */}
         <div
           className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-700 ${showAnimation ? 'opacity-100' : 'opacity-0'
-            }`}
+          }`}
           onClick={() => {
             onClose(); reset();
           }}
@@ -81,7 +81,7 @@ const AddPostModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
         {/* Контент модалки */}
         <div
           className={clsx(`flex flex-col bg-white p-6 rounded-xl shadow-lg z-10 gap-4 w-[40%] h-[80%] transition-all duration-700 transform ${showAnimation ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
-            }`)}
+          }`)}
         >
           <h2 className="text-3xl font-medium text-center">Новый пост:</h2>
 

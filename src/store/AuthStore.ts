@@ -4,6 +4,7 @@ import { innerApi, outerApi } from 'imp/utils/constants/endpoints';
 import api from 'imp/utils/axios/axios';
 import { User } from 'imp/utils/interfaces';
 import axios from 'axios';
+import { cookies } from 'next/headers';
 
 export interface authInterface {
     email: string,
@@ -67,14 +68,13 @@ class AuthStore {
       console.log(error);
       if(response.data.accessToken !== undefined){
         localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
+        runInAction(() => {
+          this.isAuth = true;
+          this.userData.uuid = response.data.uuid;
+        });
       } else{
         if(error === 'SequelizeUniqueConstraintError'){
           errorMessage = 'emailExists';
-        } else{
-          runInAction(() => {
-            this.isAuth = true;
-            this.userData.uuid = response.data.uuid;
-          });
         }
       }
 
