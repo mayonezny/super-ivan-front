@@ -1,9 +1,9 @@
 /* eslint-disable no-magic-numbers */
 import { makeAutoObservable, runInAction } from 'mobx';
-import api from 'axios';
 import { Post } from '../utils/interfaces';
-import { innerApi } from 'imp/utils/constants/endpoints';
+import { innerApi, outerApi } from 'imp/utils/constants/endpoints';
 import { updatableData } from 'imp/app/components/blog/postCard';
+import api from 'imp/utils/axios/axios';
 class PostsStore {
   posts: Post[] = [];
   loading: boolean = false;
@@ -58,7 +58,7 @@ class PostsStore {
 
   addPost = async (post: Post): Promise<number> => {
     try {
-      const response = await api.post<Post>(`${innerApi}/posts/addpost`, post);
+      const response = await api.post<Post>(`${outerApi}/posts/addpost`, post, { withCredentials: true });
       runInAction(() => {
         this.posts.push(response.data);
       });
@@ -85,7 +85,7 @@ class PostsStore {
 
   deletePost = async (postId: number) => {
     try {
-      await api.delete(`${innerApi}/posts/deletepost/${postId}`);
+      await api.delete(`${innerApi}/posts/deletepost/${postId}`, { withCredentials: true });
       runInAction(() => {
         this.posts = this.posts.filter(post => post.id !== postId); // Удаляем пост
       });

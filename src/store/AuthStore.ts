@@ -4,88 +4,87 @@ import { innerApi, outerApi } from 'imp/utils/constants/endpoints';
 import api from 'imp/utils/axios/axios';
 import { User } from 'imp/utils/interfaces';
 import axios from 'axios';
-import { cookies } from 'next/headers';
 
 export interface authInterface {
     email: string,
     password: string
 }
 class AuthStore {
-  isAuth: boolean = false;
-  loading: boolean = false;
-  error: string | null = null;
-  userData: User = {
-    uuid: '----',
-    accessToken: '',
-  };
+    isAuth: boolean = false;
+    loading: boolean = false;
+    error: string | null = null;
+    userData: User = {
+        uuid: '----',
+        accessToken: '',
+    };
 
-  constructor() {
-    makeAutoObservable(this, {}, { autoBind: true });
-  }
-
-  login = async ({ email, password }: authInterface) => {
-    let errorMessage: string = '';
-    try {
-      this.loading = true;
-      const response = await api.post<User>(`${innerApi}/auth/login`, { email, password });
-      localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
-      console.log(response);
-      runInAction(() => {
-        this.isAuth = true;
-        this.userData.uuid = response.data.uuid;
-      });
-      console.log();
-    } catch (err: any) {
-      errorMessage = err.response?.data?.message || 'Сообщение не получено';
-    } finally {
-      this.loading = false;
+    constructor() {
+        makeAutoObservable(this, {}, { autoBind: true });
     }
-    return errorMessage || null;
-  };
 
-  logout = async () => {
-    try {
-      this.loading = true;
-      await api.post(`${innerApi}/auth/logout`);
-      localStorage.removeItem('accessToken'); //добавить логику для рефреш токена
-      runInAction(() => {
-        this.isAuth = false;
-      });
-    } catch (err: any) {
-      console.error(err.response?.data?.message);
-    } finally {
-      this.loading = false;
-    }
-  };
-
-  register = async ({ email, password }: authInterface) => {
-    console.log('l', email, 'p', password);
-    let errorMessage: string = '';
-    try {
-      this.loading = true;
-      const response = await axios.post<User>(`${innerApi}/auth/register`, { email, password }, { withCredentials: true });
-      const error: string = response.data.error?.name || '';
-      console.log(error);
-      if(response.data.accessToken !== undefined){
-        localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
-        runInAction(() => {
-          this.isAuth = true;
-          this.userData.uuid = response.data.uuid;
-        });
-      } else{
-        if(error === 'SequelizeUniqueConstraintError'){
-          errorMessage = 'emailExists';
+    login = async ({ email, password }: authInterface) => {
+        let errorMessage: string = '';
+        try {
+            this.loading = true;
+            const response = await api.post<User>(`${innerApi}/auth/login`, { email, password });
+            localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
+            console.log(response);
+            runInAction(() => {
+                this.isAuth = true;
+                this.userData.uuid = response.data.uuid;
+            });
+            console.log();
+        } catch (err: any) {
+            errorMessage = err.response?.data?.message || 'Сообщение не получено';
+        } finally {
+            this.loading = false;
         }
-      }
+        return errorMessage || null;
+    };
 
-    } catch (err: any) {
-      console.log(err);
-      errorMessage = err.response?.data?.message || 'Сообщение не получено';
-    } finally {
-      this.loading = false;
-    }
-    return errorMessage === '' ? null : errorMessage;
-  };
+    logout = async () => {
+        try {
+            this.loading = true;
+            await api.post(`${innerApi}/auth/logout`);
+            localStorage.removeItem('accessToken'); //добавить логику для рефреш токена
+            runInAction(() => {
+                this.isAuth = false;
+            });
+        } catch (err: any) {
+            console.error(err.response?.data?.message);
+        } finally {
+            this.loading = false;
+        }
+    };
+
+    register = async ({ email, password }: authInterface) => {
+        console.log('l', email, 'p', password);
+        let errorMessage: string = '';
+        try {
+            this.loading = true;
+            const response = await axios.post<User>(`${innerApi}/auth/register`, { email, password }, { withCredentials: true });
+            const error: string = response.data.error?.name || '';
+            console.log(error);
+            if (response.data.accessToken !== undefined) {
+                localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
+                runInAction(() => {
+                    this.isAuth = true;
+                    this.userData.uuid = response.data.uuid;
+                });
+            } else {
+                if (error === 'SequelizeUniqueConstraintError') {
+                    errorMessage = 'emailExists';
+                }
+            }
+
+        } catch (err: any) {
+            console.log(err);
+            errorMessage = err.response?.data?.message || 'Сообщение не получено';
+        } finally {
+            this.loading = false;
+        }
+        return errorMessage === '' ? null : errorMessage;
+    };
 
 }
 
