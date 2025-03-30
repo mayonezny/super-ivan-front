@@ -1,4 +1,3 @@
-import { UUID } from 'crypto';
 
 export interface Post {
     id?: number;
@@ -11,7 +10,7 @@ export interface Post {
     picFilename?: string;
   }
 export interface User{
-    uuid: UUID;
+    email: string;
     accessToken: string;
     error?: any;
 }

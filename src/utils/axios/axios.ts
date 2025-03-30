@@ -3,8 +3,16 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { outerApi } from '../constants/endpoints';
 
 const api = axios.create({
+  withCredentials: true,
   baseURL: 'https://localhost:8080', // Замени на свой базовый URL
   timeout: 10000, // Тайм-аут в 10 секунд
+});
+
+api.interceptors.request.use((config) => {
+  if (localStorage.getItem('token')) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  }
+  return config;
 });
 
 let isRefreshing = false;
@@ -28,9 +36,10 @@ api.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
-    console.log('перший признак работы интерцептора')
+
+    console.log('перший признак работы интерцептора');
     if (error.response?.status === 401 && !originalRequest._retry) {
-      console.log('прилетает')
+      console.log('прилетает');
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
@@ -50,8 +59,8 @@ api.interceptors.response.use(
 
       try {
         console.log('zzzz');
-        const { data } = await api.post(`${outerApi}/auth/refresh`, { "ivan": 'zapara' }, { headers: { 'Content-Type': 'application/json' }, withCredentials: true });
-        console.log('dt', data)
+        const { data } = await api.post(`${outerApi}/auth/refresh`, { 'ivan': 'zapara' }, { headers: { 'Content-Type': 'application/json' } });
+        console.log('dt', data);
         // Обновляем токен в локальном хранилище или глобальном состоянии
         api.defaults.headers.common['Authorization'] = 'Bearer ' + data.accessToken;
         processQueue(null, data.accessToken);

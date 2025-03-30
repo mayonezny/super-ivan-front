@@ -3,6 +3,7 @@ import React from 'react';
 // eslint-disable-next-line camelcase
 import { Geist, Inter, Roboto_Condensed, UnifrakturMaguntia } from 'next/font/google';
 import './globals.css';
+import AuthInitializer from './components/services/authInitializer';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${geistSans.variable} ${UniF.variable} ${RobotoC.variable} antialiased`}
       >
+        <AuthInitializer />
         {children}
       </body>
     </html>

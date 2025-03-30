@@ -4,5 +4,4 @@ export const nextPort: string = '3000';
 export const nestPort: string = '8080';
 export const minioPort: string = '9000';
 export const minioAdminPort: string = '9090';
-export const innerApi: string = `http://${api}:${nextPort}/api`;
 export const outerApi: string = `http${safeMode ? 's' : ''}://${api}:${nestPort}/api`;

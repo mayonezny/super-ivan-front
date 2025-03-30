@@ -1,7 +1,9 @@
+'use client';
 import authStore from 'imp/store/AuthStore';
 import NavButton from '../buttons/navButton';
 import Clock from './clock';
 import Image from 'next/image';
+import { observer } from 'mobx-react';
 const Header = () => {
 
   return (
@@ -26,4 +28,4 @@ const Header = () => {
     </nav>
   );
 };
-export default Header;
+export default observer(Header);
