@@ -11,7 +11,7 @@ import authStore from 'imp/store/AuthStore';
 import { redirect } from 'next/navigation';
 import NavButton from '../components/buttons/navButton';
 
-interface registerDataInterface {
+export interface registerDataInterface {
   email: string,
   password: string,
 }
@@ -37,9 +37,9 @@ const RegisterPage = () => {
     console.log(data);
     const newUser = await authStore.register({ email, password }) || null;
     console.log(newUser);
-    if(newUser === null){
+    if (newUser === null) {
       redirect('/welcome');
-    } else if(newUser === 'emailExists'){
+    } else if (newUser === 'emailExists') {
       setError('email', {
         type: 'server',
         message: 'Этот email уже занят',

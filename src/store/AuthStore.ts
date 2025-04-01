@@ -6,8 +6,8 @@ import { User } from 'imp/utils/interfaces';
 import axios from 'axios';
 
 export interface authInterface {
-    email: string,
-    password: string
+  email: string,
+  password: string
 }
 class AuthStore {
   isAuth: boolean = false;
@@ -32,20 +32,24 @@ class AuthStore {
     let errorMessage: string = '';
     try {
       this.loading = true;
-      const response = await api.post<User>(`${outerApi}/auth/login`, { email, password });
-      localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
+      const response = await api.post<User>(`${outerApi}/auth/login`, { email, password }, { withCredentials: true });//добавить логику для рефреш токена
       console.log(response);
-      runInAction(() => {
-        this.isAuth = true;
-        this.userData.uuid = response.data.uuid;
-      });
-      console.log();
+      const error: string = response.data.error;
+      console.log(error);
+      if (response.data.accessToken !== undefined) {
+        localStorage.setItem('accessToken', response.data.accessToken); //добавить логику для рефреш токена
+        runInAction(() => {
+          this.isAuth = true;
+          this.userData.email = response.data.email;
+        });
+      }
     } catch (err: any) {
-      errorMessage = err.response?.data?.message || 'Сообщение не получено';
+      console.log(err);
+      errorMessage = err.response.data || 'Сообщение не получено';
     } finally {
       this.loading = false;
     }
-    return errorMessage || null;
+    return errorMessage === '' ? null : errorMessage;
   };
 
   logout = async () => {
@@ -68,7 +72,7 @@ class AuthStore {
     let errorMessage: string = '';
     try {
       this.loading = true;
-      const response = await axios.post<User>(`${outerApi}/auth/register`, { email, password }, { withCredentials: true });
+      const response = await api.post<User>(`${outerApi}/auth/register`, { email, password }, { withCredentials: true });
       const error: string = response.data.error;
       console.log(error);
       if (response.data.accessToken !== undefined) {
@@ -82,7 +86,7 @@ class AuthStore {
       console.log(err);
       errorMessage = err.response?.data?.message || 'Сообщение не получено';
       const emailUniqueMessage: string | undefined = err.response.data.error.name;
-      if(emailUniqueMessage === 'SequelizeUniqueConstraintError'){
+      if (emailUniqueMessage === 'SequelizeUniqueConstraintError') {
         errorMessage = 'emailExists';
       }
 
