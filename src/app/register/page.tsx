@@ -10,7 +10,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import authStore from 'imp/store/AuthStore';
 import { redirect } from 'next/navigation';
 import NavButton from '../components/buttons/navButton';
-
+import { useState } from 'react';
+import React from 'react';
 export interface registerDataInterface {
   email: string,
   password: string,
@@ -31,11 +32,16 @@ const RegisterPage = () => {
   } = useForm({
     resolver: yupResolver(registerSchema), // передаем схему валидации
   });
+  const [isChecked, setIsChecked] = useState(false);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked); // 👈 именно checked!
+  };
 
   const handleRegister = async (data: registerDataInterface) => {
     const { email, password } = data;
+    const doNotRemember = isChecked;
     console.log(data);
-    const newUser = await authStore.register({ email, password }) || null;
+    const newUser = await authStore.register({ email, password, doNotRemember }) || null;
     console.log(newUser);
     if (newUser === null) {
       redirect('/welcome');
@@ -63,7 +69,7 @@ const RegisterPage = () => {
             {errors.password && <span className='flex text-red-500 text-xs items-center -mb-[8px] -mt-[8px] ml-2'>{errors.password.message}</span>}
             <input type='password' {...register('confirmPassword')} className={clsx('bg-[#f0f0f0] rounded-lg w-full p-2 xl:p-3 focus:outline-none font-[family-name:var(--font-roboto-c)] placeholder:px-[2px] placeholder:text-[#a0a0a0] text-lg')} placeholder='Подтвердить пароль...'></input>
             {errors.confirmPassword && <span className='flex text-red-500 text-xs items-center -mb-[8px] -mt-[8px] ml-2'>{errors.confirmPassword.message}</span>}
-            <FormControlLabel control={<Checkbox />} label="Не запоминать аккаунт" />
+            <FormControlLabel control={<Checkbox checked={isChecked} onChange={handleChange} />} label="Не запоминать аккаунт" />
             <button className='p-2 px-4 bg-blue-500 hover:bg-blue-600 duration-300 rounded-md text-white'>Зарегистрироваться</button>
             <span className='text-center'>Уже есть аккаунт? <NavButton href='/login' className='!px-0 text-blue-600 hover:text-blue-800 hover:underline'>Войти</NavButton></span>
           </div>

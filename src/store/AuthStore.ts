@@ -8,6 +8,7 @@ import axios from 'axios';
 export interface authInterface {
   email: string,
   password: string
+  doNotRemember?: boolean
 }
 class AuthStore {
   isAuth: boolean = false;
@@ -28,11 +29,11 @@ class AuthStore {
     this.userData.accessToken = data.accessToken;
   };
 
-  login = async ({ email, password }: authInterface) => {
+  login = async ({ email, password, doNotRemember }: authInterface) => {
     let errorMessage: string = '';
     try {
       this.loading = true;
-      const response = await api.post<User>(`${outerApi}/auth/login`, { email, password }, { withCredentials: true });//добавить логику для рефреш токена
+      const response = await api.post<User>(`${outerApi}/auth/login`, { email, password, doNotRemember }, { withCredentials: true });//добавить логику для рефреш токена
       console.log(response);
       const error: string = response.data.error;
       console.log(error);
@@ -67,12 +68,12 @@ class AuthStore {
     }
   };
 
-  register = async ({ email, password }: authInterface) => {
+  register = async ({ email, password, doNotRemember }: authInterface) => {
     console.log('l', email, 'p', password);
     let errorMessage: string = '';
     try {
       this.loading = true;
-      const response = await api.post<User>(`${outerApi}/auth/register`, { email, password }, { withCredentials: true });
+      const response = await api.post<User>(`${outerApi}/auth/register`, { email, password, doNotRemember }, { withCredentials: true });
       const error: string = response.data.error;
       console.log(error);
       if (response.data.accessToken !== undefined) {

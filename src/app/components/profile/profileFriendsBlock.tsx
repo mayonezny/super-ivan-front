@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 
 import { Dispatch, SetStateAction } from 'react';
 import ProfilePic from './profilePic';
@@ -20,55 +19,55 @@ const ProfileFriendsBlock = ({ activePage, setActivePage, setPrevActivePage, set
       </motion.div>
       <div className="grid grid-cols-4 grid-rows-[repeat(3, auto)] gap-y-4 gap-x-2 overflow-y-auto h-full justify-around items-center leading-5 text-center">
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
-          <ProfilePic size={80}/>
+          <ProfilePic size={80} className={''}/>
           <h1>Женя Чеченец Купер Пердоле</h1>
         </div>
 
