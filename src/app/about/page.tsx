@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Header from '../components/header/header';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { GiHeartWings } from 'react-icons/gi';
+import EmailForm from './emailForm';
 
 const AboutPage = () => {
   const tv = {
@@ -133,6 +134,7 @@ const AboutPage = () => {
             />
             <button onClick={addElement} className='p-2 rounded w-full bg-gradient-to-r from-gray-100 via-green-500 to-gray-100 text-white mt-2'><h1 className='text-center'>Добавить элемент</h1></button>
           </div>
+          <EmailForm/>
         </div>
       </div>
     </div>
