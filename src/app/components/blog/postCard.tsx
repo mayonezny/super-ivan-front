@@ -1,4 +1,4 @@
-/* eslint-disable no-magic-numbers */
+
 'use client';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
@@ -14,6 +14,7 @@ import Checkmark from '../../../../public/icons/Checkmark';
 import TextareaAutosize from 'react-textarea-autosize';
 import Sun from '../../../../public/icons/sun';
 import clsx from 'clsx';
+import RatingStars from '../ratingStars/ratingStars';
 
 type PostCard = Post & {as : ElementType, edit: boolean}
 export type updatableData = { title: string, content: string }
@@ -62,7 +63,7 @@ const Card = ({ id, href, pic, title, author, date, picFilename, content, ...pro
 
     <div className="card-default relative shadow-[0px_0px_10px_rgba(0,0,0,0.2)] bg-white rounded-lg flex justify-between bg-cover bg-center transition-transform duration-300 hover:scale-105 2xl:w-card-2xl 2xl:h-card-2xl xl:w-card-xl xl:h-card-xl" style={{ backgroundImage: `url(${pic})` }}>
       { }
-      <Component href={!edit ? href : null} onClick={edit ? editMode ? () => {} : () => setMenuOpen(!menuOpen) : () => {}}>
+      <Component href={!edit ? href : null} onClick={/*edit ? editMode ? () => {} : () => setMenuOpen(!menuOpen) : () => {}*/ console.log('z')}>
         <form onSubmit={handleSubmit(handlePostUpdate)}>
           <div className="gap-5 hover:cursor-pointer absolute rounded-lg flex flex-col p-5 inset-0 bg-gradient-to-b from-white/100 via-white/30 to-black/100">
             {editMode ? <div className='flex items-center gap-2'>
@@ -83,8 +84,9 @@ const Card = ({ id, href, pic, title, author, date, picFilename, content, ...pro
                 <button type='button' onClick={() => setContentColorBlack(prevState => !prevState)}><Sun color={contentColorBlack ? '#fff' : '#000'}/></button>
               </div>  : <></>}
             {errors.content && <span className='text-red-500 text-sm'>{errors.content.message}</span>}
-            <div className='flex justify-between mt-auto'>
+            <div className='flex justify-between mt-auto gap-4'>
               <h1 className="font-bold text-[22px] font-[family-name:var(--font-roboto-c)] text-white">{author && `Автор: ${author}`}</h1>
+              <RatingStars/>
               <h1 className="font-bold text-[20px] font-[family-name:var(--font-roboto-c)] text-white">{date && `${format(date, 'dd MMMM, HH:mm', { locale: ru })}`}</h1>
             </div>
           </div>

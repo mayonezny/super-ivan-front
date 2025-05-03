@@ -1,9 +1,9 @@
 
-import ClickMenu from './client-components/main-page/ClickMenu';
 import BlogMenu from './components/blog/postsContainer';
 import Header from './components/header/header';
 import MainLayout from './layouts/mainLayout';
 import SearchMenu from './components/misc/searchMenu';
+import Footer from './components/footer/footer';
 
 export interface Post {
   id?: number;
@@ -22,15 +22,13 @@ export default function MainPage() {
       <Header/>
       <MainLayout>
         <div className='flex justify-between'>
-          <h1 className='text-4xl self-start mb-4'>Здарова Ишак! Смари!</h1>
+          <h1 className='text-4xl self-start mb-4'>Добро пожаловать! Взгляните на свежие посты!</h1>
           <SearchMenu type='main'/>
         </div>
 
         <BlogMenu type='all'/>
       </MainLayout>
-
-      <ClickMenu />
-
+      <Footer/>
     </div>
   );
 }

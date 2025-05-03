@@ -7,6 +7,7 @@ import Header from '../components/header/header';
 import SearchMenu from '../components/misc/searchMenu';
 import AddPostModal from '../components/modal/addPostModal';
 import MainLayout from '../layouts/mainLayout';
+import PostFilter from '../components/postFilter/postFilter';
 
 const BlogPage = () => {
 
@@ -21,10 +22,12 @@ const BlogPage = () => {
               <Filter/>
             </ModalContainer>
             <SearchMenu type='blog'/>
+
           </div>
 
         </div>
         <BlogMenu type='user' className='w-full p-7 gap-5 shadow-[0px_0px_3px_rgba(0,0,0,0.2)] rounded-xl bg-white'/>
+        <PostFilter/>
       </MainLayout>
     </div>
   );

@@ -28,7 +28,7 @@ const RobotoC = Roboto_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: 'Без названия - Неизвестен',
+  title: 'Социальная сеть',
   description: 'Здесь закалялась сталь',
 };
 
