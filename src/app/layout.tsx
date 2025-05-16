@@ -1,5 +1,8 @@
+'use client';
 import type { Metadata, Viewport } from 'next';
 import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../store/tvSlice';
 // eslint-disable-next-line camelcase
 import { Geist, Inter, Roboto_Condensed, UnifrakturMaguntia } from 'next/font/google';
 import './globals.css';
@@ -27,16 +30,6 @@ const RobotoC = Roboto_Condensed({
   weight: '400',
 });
 
-export const metadata: Metadata = {
-  title: 'Без названия - Неизвестен',
-  description: 'Здесь закалялась сталь',
-};
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,7 +41,7 @@ export default function RootLayout({
         className={`${inter.variable} ${geistSans.variable} ${UniF.variable} ${RobotoC.variable} antialiased`}
       >
         <AuthInitializer />
-        {children}
+        <Provider store={store}>{children}</Provider>
       </body>
     </html>
   );
