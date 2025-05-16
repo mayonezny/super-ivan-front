@@ -17,7 +17,7 @@ const Header = () => {
             height={64}
           />
         </NavButton>
-        <NavButton href='/todo'>О сайте</NavButton>
+        <NavButton href='/phones'>О сайте</NavButton>
       </div>
       <Clock/>
       <div className="flex gap-8">

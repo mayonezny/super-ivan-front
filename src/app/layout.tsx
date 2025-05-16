@@ -2,7 +2,7 @@
 import type { Metadata, Viewport } from 'next';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { store } from '../store/tvSlice';
+import { store } from '../store/';
 // eslint-disable-next-line camelcase
 import { Geist, Inter, Roboto_Condensed, UnifrakturMaguntia } from 'next/font/google';
 import './globals.css';
