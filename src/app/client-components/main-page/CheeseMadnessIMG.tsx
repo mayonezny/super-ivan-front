@@ -9,7 +9,7 @@ export default function CheeseMadnessIMG({ ...props }) {
   } = props;
   return (
     <Image
-      src="/ВАУ-CHEESE-MADNESS.svg"
+      src="/Vpr4Ever_logo.svg"
       width={600}
       height={600}
       alt='chess madness'

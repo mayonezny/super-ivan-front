@@ -36,39 +36,39 @@ const ProfileFriendsBlock = ({ activePage, setActivePage, setPrevActivePage, set
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихиха</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихиха</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихиха</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихиха</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихиха</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихиха</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихихае</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихиха</h1>
         </div>
         <div className='flex flex-col items-center justify-center gap-1'>
           <ProfilePic size={80} className={''}/>
-          <h1>Женя Чеченец Купер Пердоле</h1>
+          <h1>Женя Чеченец Купер хихихиха</h1>
         </div>
 
       </div>

@@ -11,7 +11,7 @@ const Header = () => {
       <div className="flex gap-8 items-center">
         <NavButton href='/' className='px-0 py-0'>
           <Image
-            src='/ВАУ-CHEESE-MADNESS.svg'
+            src='/Vpr4Ever_logo.svg'
             alt='madnessito'
             width={64}
             height={64}

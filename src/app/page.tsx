@@ -21,15 +21,13 @@ export default function MainPage() {
     <div className="flex flex-col items-center justify-items-center min-h-screen font-[family-name:var(--font-inter)] bg-gray-100">
       <Header/>
       <MainLayout>
-        <div className='flex justify-between'>
-          <h1 className='text-4xl self-start mb-4'>Здарова Ишак! Смари!</h1>
+        <div className='flex justify-between '>
+          <h1 className='text-4xl self-start mb-4'>Добро пожаловать на Vpr4Ever!</h1>
           <SearchMenu type='main'/>
         </div>
-
+        <ClickMenu />
         <BlogMenu type='all'/>
       </MainLayout>
-
-      <ClickMenu />
 
     </div>
   );

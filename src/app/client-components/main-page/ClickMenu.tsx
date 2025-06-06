@@ -15,7 +15,7 @@ const ClickMenu = () => {
   };
 
   return (
-    <div>
+    <div className='flex flex-col items-center'>
       <CheeseMadnessIMG click={receiveData} />
       <PizdukTextField data={data} />
     </div>
