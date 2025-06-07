@@ -39,12 +39,12 @@ const RatingStars: React.FC<RatingStarsProps> = ({ maxStars = 5 }) => {
           );
         })}
       </div>
-      <button
+      {/* <button
         onClick={handleSos}
         className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
       >
                 Отправить
-      </button>
+      </button> */}
     </div>
   );
 };
